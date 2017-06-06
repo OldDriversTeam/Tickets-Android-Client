@@ -1,10 +1,8 @@
 package com.example.olddrivers.myapplication.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
@@ -15,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.olddrivers.myapplication.R;
+import com.example.olddrivers.myapplication.model.FilmItem;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
@@ -23,6 +22,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     ImageView description_expand;
     Button btn_buy;
 
+    FilmItem filmItem;
     int default_description_lines;
 
     @Override
@@ -39,6 +39,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         description_text = (TextView) findViewById(R.id.description_view);
         description_expand = (ImageView) findViewById(R.id.expand_view);
         btn_buy = (Button) findViewById(R.id.btn_toBuying);
+
+        filmItem = new FilmItem("神奇女侠", null, null);
 
         default_description_lines = 3;
         //description_view.setHeight(description_view.getLineHeight() * default_description_lines);
@@ -98,7 +100,11 @@ public class MovieDetailActivity extends AppCompatActivity {
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MovieDetailActivity.this, CinemaChoosingActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("FilmItem", filmItem);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 

@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/movie_list_item_image"
         android:layout_gravity="center"
-        android:src="@mipmap/movie"
+        android:src="@mipmap/ww"
         android:layout_width="105dp"
         android:layout_height="149dp"
         android:layout_marginLeft="8dp"

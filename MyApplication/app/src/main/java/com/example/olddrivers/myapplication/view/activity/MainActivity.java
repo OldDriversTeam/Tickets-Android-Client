@@ -72,4 +72,5 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         //tab_FindFragment_title.set
     }
+
 }

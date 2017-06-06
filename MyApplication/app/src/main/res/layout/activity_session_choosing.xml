@@ -1,0 +1,18 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.olddrivers.myapplication.view.activity.SessionChoosingActivity">
+
+    <TextView
+        android:id="@+id/ss_cinema_name"
+        style="@style/SessionSelectTitle"
+        android:text="金逸" />
+
+    <TextView
+        android:id="@+id/ss_movie_name"
+        style="@style/SessionSelectTitle"
+        android:text="神奇" />
+
+</LinearLayout>
