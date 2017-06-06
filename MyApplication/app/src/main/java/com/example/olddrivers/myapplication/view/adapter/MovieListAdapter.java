@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import com.example.olddrivers.myapplication.R;
 import com.example.olddrivers.myapplication.model.Movie;
+
 
 import java.util.List;
 
@@ -64,10 +66,12 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
         public ViewHolder(View view) {
             super(view);
             mView = view;
+
             imageView = (ImageView) view.findViewById(R.id.movie_list_item_image);
             name = (TextView) view.findViewById(R.id.movie_list_item_name);
             score = (TextView) view.findViewById(R.id.movie_list_item_score);
             message = (TextView) view.findViewById(R.id.movie_list_item_message);
+
         }
 
         @Override
