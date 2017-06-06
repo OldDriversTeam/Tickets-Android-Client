@@ -38,18 +38,18 @@ public class MainActivity extends AppCompatActivity {
 
         resources = getResources();
 
-        InitWidth();
+        //InitWidth();
 
-        InitTextView();
+        //InitTextView();
 
-        InitViewPager();
+        //InitViewPager();
     }
 
-    private void InitTextView() {
+    /*private void InitTextView() {
         movie_text = (TextView) findViewById(R.id.tb_movie);
         setting_text = (TextView) findViewById(R.id.tb_setting);
 
         movie_text.setOnClickListener(new MyOnClickListener(0));
         setting_text.setOnClickListener(new MyOnClickListener(1));
-    }
+    }*/
 }

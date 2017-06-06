@@ -7,7 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.olddrivers.myapplication.view.fragment.MovieListFragment.OnListFragmentInteractionListener;
-import com.example.olddrivers.myapplication.model.dummy.DummyContent.DummyItem;
+import com.example.olddrivers.myapplication.model.DummyContent.DummyItem;
+import com.example.olddrivers.myapplication.R;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_movie, parent, false);
+                .inflate(R.layout.fragment_movie_list_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -65,8 +66,8 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mIdView = (TextView) view.findViewById(R.id.list);
+            mContentView = (TextView) view.findViewById(R.id.list);
         }
 
         @Override

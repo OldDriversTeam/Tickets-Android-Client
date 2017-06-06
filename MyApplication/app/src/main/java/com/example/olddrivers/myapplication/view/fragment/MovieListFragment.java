@@ -11,9 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.olddrivers.myapplication.R;
-import com.example.olddrivers.myapplication.model.dummy.DummyContent;
-import com.example.olddrivers.myapplication.model.dummy.DummyContent.DummyItem;
-import com.example.olddrivers.myapplication.view.adapter.MymovieRecyclerViewAdapter;
+import com.example.olddrivers.myapplication.model.DummyContent;
+import com.example.olddrivers.myapplication.model.DummyContent.DummyItem;
+import com.example.olddrivers.myapplication.view.adapter.MovieListAdapter;
 
 /**
  * A fragment representing a list of Items.
@@ -69,7 +69,7 @@ public class MovieListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MymovieRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MovieListAdapter(DummyContent.ITEMS, mListener));
         }
         return view;
     }
