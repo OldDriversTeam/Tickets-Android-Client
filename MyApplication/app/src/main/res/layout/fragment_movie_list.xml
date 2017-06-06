@@ -20,12 +20,10 @@
     </SearchView>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/list"
+        android:id="@+id/movie_list"
         android:name="com.example.olddrivers.myapplication.view.fragment.MovieListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
         tools:context="com.example.olddrivers.myapplication.view.fragment.MovieListFragment"
         tools:listitem="@layout/fragment_movie_list_item">
