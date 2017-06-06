@@ -1,14 +1,123 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingFragment">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".view.fragment.SettingFragment">
 
-    <com.google.android.gms.plus.PlusOneButton xmlns:plus="http://schemas.android.com/apk/lib/com.google.android.gms.plus"
-        android:id="@+id/plus_one_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        plus:annotation="inline"
-        plus:size="standard" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <TextView
+            android:text="用户名"
+            android:layout_width="96dp"
+            android:layout_height="50dp"/>
+
+        <EditText
+            android:layout_width="184dp"
+            android:layout_height="50dp"
+            android:id="@+id/user_name" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:paddingTop="20sp"
+            android:text="性别"
+            android:layout_width="96dp"
+            android:layout_height="50dp" />
+
+        <RadioGroup
+            android:paddingTop="10sp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="男"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="女"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="年龄"
+            android:layout_width="96dp"
+            android:layout_height="50dp"/>
+
+        <EditText
+            android:layout_width="184dp"
+            android:layout_height="50dp"
+            android:id="@+id/user_age" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="手机号码"
+            android:layout_width="96dp"
+            android:layout_height="50dp" />
+
+        <EditText
+            android:layout_width="184dp"
+            android:layout_height="50dp"
+            android:id="@+id/user_phone" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="email"
+            android:layout_width="96dp"
+            android:layout_height="50dp"/>
+
+        <EditText
+            android:layout_width="184dp"
+            android:layout_height="50dp"
+            android:id="@+id/user_email" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/user_order"
+        android:text="我的订单"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
