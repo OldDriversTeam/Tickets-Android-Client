@@ -10,114 +10,134 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".view.fragment.SettingFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:text="用户名"
-            android:layout_width="96dp"
-            android:layout_height="50dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <EditText
-            android:layout_width="184dp"
-            android:layout_height="50dp"
-            android:id="@+id/user_name_setting" />
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:counterEnabled="true"
+                app:counterMaxLength="20">
 
-    </LinearLayout>
+                <AutoCompleteTextView
+                    android:id="@+id/user_name_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/user_name"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            android:paddingTop="20sp"
-            android:text="性别"
-            android:layout_width="96dp"
-            android:layout_height="50dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <RadioGroup
-            android:paddingTop="10sp"
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:paddingTop="20sp"
+                    android:textSize="19sp"
+                    android:text="性别"
+                    android:layout_width="96dp"
+                    android:layout_height="50dp" />
 
-            <RadioButton
-                android:id="@+id/radioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                <RadioGroup
+                    android:paddingTop="10sp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-            <TextView
-                android:text="男"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                    <RadioButton
+                        android:id="@+id/radioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-            <RadioButton
-                android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text="男"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-            <TextView
-                android:text="女"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                    <RadioButton
+                        android:id="@+id/radioButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
 
-        </RadioGroup>
+                    <TextView
+                        android:text="女"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-    </LinearLayout>
+                </RadioGroup>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            </LinearLayout>
 
-        <TextView
-            android:text="年龄"
-            android:layout_width="96dp"
-            android:layout_height="50dp"/>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:counterEnabled="true"
+                app:counterMaxLength="20">
 
-        <EditText
-            android:layout_width="184dp"
-            android:layout_height="50dp"
-            android:id="@+id/user_age_setting" />
+                <AutoCompleteTextView
+                    android:id="@+id/user_age_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/phone_number"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:singleLine="true" />
 
-    </LinearLayout>
+            </android.support.design.widget.TextInputLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:counterEnabled="true"
+                app:counterMaxLength="20">
 
-        <TextView
-            android:text="手机号码"
-            android:layout_width="96dp"
-            android:layout_height="50dp" />
+                <AutoCompleteTextView
+                    android:id="@+id/user_phone_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/phone_number"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:singleLine="true" />
 
-        <EditText
-            android:layout_width="184dp"
-            android:layout_height="50dp"
-            android:id="@+id/user_phone_setting" />
+            </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:counterMaxLength="16">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/user_email_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="email"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />
 
-        <TextView
-            android:text="email"
-            android:layout_width="96dp"
-            android:layout_height="50dp"/>
+            </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:layout_width="184dp"
-            android:layout_height="50dp"
-            android:id="@+id/user_email_setting" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/setting_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="修改设置"
+                android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/user_order"
-        android:text="修改设置"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

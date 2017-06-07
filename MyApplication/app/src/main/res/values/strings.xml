@@ -9,6 +9,12 @@
     <string name="title_activity_parts_supplier">PartsSupplierActivity</string>
     <string name="title_activity_user_login">Sign in</string>
 
+    <!--Strings related to user infomation-->
+    <string name="user_name">用户名</string>
+    <string name="phone_number">手机号码</string>
+    <string name="password">密码</string>
+    <string name="sex">性别</string>
+    <string name="age">年龄</string>
     <!-- Strings related to login -->
     <string name="prompt_phone">Phone Number</string>
     <string name="prompt_password">Password</string>
