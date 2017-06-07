@@ -15,4 +15,9 @@
         style="@style/SessionSelectTitle"
         android:text="神奇" />
 
+    <ListView
+        android:id="@+id/ss_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>
