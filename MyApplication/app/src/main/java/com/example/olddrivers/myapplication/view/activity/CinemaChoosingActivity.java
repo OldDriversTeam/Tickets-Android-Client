@@ -33,6 +33,7 @@ import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 public class CinemaChoosingActivity extends AppCompatActivity {
 
@@ -92,6 +93,8 @@ public class CinemaChoosingActivity extends AppCompatActivity {
         private static final String ARG_SECTION_NUMBER = "section_number";
         List<Map<String, Object>> data;
         SimpleAdapter simpleAdapter;
+        int month;
+        int date;
 
         public PlaceholderFragment() {
         }
@@ -114,9 +117,13 @@ public class CinemaChoosingActivity extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_cinema_choosing, container, false);
             ListView listView = (ListView) rootView.findViewById(R.id.cinema_listview);
             data = new ArrayList<>();
+
+            final List<String> cinemaNames = new ArrayList<>();
+
             for (int i = 0; i < 20; i++) {
                 Map<String, Object> temp = new LinkedHashMap<>();
-                temp.put("name", "金逸（大学城）");
+                cinemaNames.add("金逸（大学城）" + String.valueOf(i));
+                temp.put("name", cinemaNames.get(i));
                 temp.put("price", i);
                 data.add(temp);
             }
@@ -126,7 +133,17 @@ public class CinemaChoosingActivity extends AppCompatActivity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent();
+                    Intent intent = new Intent(getActivity(), SessionChoosingActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("cinema_name", cinemaNames.get(position));
+
+                    int index = getArguments().getInt(ARG_SECTION_NUMBER);
+                    Calendar calendar = Calendar.getInstance();
+                    bundle.putInt("month", calendar.get(Calendar.MONTH) + 1);
+                    bundle.putInt("date", calendar.get(Calendar.DAY_OF_MONTH) + index);
+
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 }
             });
             return rootView;
@@ -147,7 +164,7 @@ public class CinemaChoosingActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            return PlaceholderFragment.newInstance(position);
         }
 
         @Override
@@ -161,7 +178,7 @@ public class CinemaChoosingActivity extends AppCompatActivity {
 
             Calendar calendar = Calendar.getInstance();
             int month = calendar.get(Calendar.MONTH) + 1;
-            int day = calendar.get(Calendar.DAY_OF_MONTH) + 1;
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
 
             switch (position) {
                 case 0:
@@ -178,4 +195,5 @@ public class CinemaChoosingActivity extends AppCompatActivity {
             return null;
         }
     }
+
 }
