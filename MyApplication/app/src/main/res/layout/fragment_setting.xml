@@ -22,7 +22,7 @@
         <EditText
             android:layout_width="184dp"
             android:layout_height="50dp"
-            android:id="@+id/user_name" />
+            android:id="@+id/user_name_setting" />
 
     </LinearLayout>
 
@@ -78,7 +78,7 @@
         <EditText
             android:layout_width="184dp"
             android:layout_height="50dp"
-            android:id="@+id/user_age" />
+            android:id="@+id/user_age_setting" />
 
     </LinearLayout>
 
@@ -94,7 +94,7 @@
         <EditText
             android:layout_width="184dp"
             android:layout_height="50dp"
-            android:id="@+id/user_phone" />
+            android:id="@+id/user_phone_setting" />
 
     </LinearLayout>
 
@@ -110,13 +110,13 @@
         <EditText
             android:layout_width="184dp"
             android:layout_height="50dp"
-            android:id="@+id/user_email" />
+            android:id="@+id/user_email_setting" />
 
     </LinearLayout>
 
     <Button
         android:id="@+id/user_order"
-        android:text="我的订单"
+        android:text="修改设置"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
