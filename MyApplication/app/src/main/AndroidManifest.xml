@@ -16,37 +16,29 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".view.activity.MainActivity">
-
-        </activity>
+        <activity android:name=".view.activity.MainActivity"></activity>
         <activity
             android:name=".view.activity.LoginActivity"
-            android:label="@string/title_activity_user_login" >
-
+            android:label="@string/title_activity_user_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".view.activity.MovieDetailActivity"
             android:label="@string/title_activity_movie_detail"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".view.activity.CinemaChoosingActivity"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".view.activity.SessionChoosingActivity"
             android:label="@string/title_activity_session_choosing"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".view.activity.RegisterActivity"></activity>
     </application>
 
 </manifest>

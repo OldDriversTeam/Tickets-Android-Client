@@ -79,7 +79,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPhoneView = (AutoCompleteTextView) findViewById(R.id.user_phone_login);
 
         //prepare autoComplete, 异步加载数据
-        getLoaderManager().initLoader(0, null, this);
+//        getLoaderManager().initLoader(0, null, this);
+        // TODO: 2017/6/7
     }
 
     private void InitPasswordText() {
@@ -126,7 +127,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mPhoneView.getText().toString();
+        String phoneNumber = mPhoneView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
@@ -135,6 +136,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Check for a valid password, if the user entered one.
         switch (InfoChecker.PasswordCheck(password)) {
             case InfoChecker.INFO_EMPTY:
+                mPasswordView.setError(getString(R.string.error_empty_password));
+                focusView = mPasswordView;
+                cancel = true;
+                break;
             case InfoChecker.INFO_TOO_SHORT:
             case InfoChecker.INFO_FORMAT_ERR:
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
@@ -144,15 +149,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         }
 
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mPhoneView.setError(getString(R.string.error_field_required));
-            focusView = mPhoneView;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            mPhoneView.setError(getString(R.string.error_invalid_email));
-            focusView = mPhoneView;
-            cancel = true;
+        switch (InfoChecker.PhoneNumberCheck(phoneNumber)) {
+            case InfoChecker.INFO_EMPTY:
+                mPhoneView.setError(getString(R.string.error_empty_phone));
+                focusView = mPhoneView;
+                cancel = true;
+                break;
+            case InfoChecker.INFO_TOO_SHORT:
+            case InfoChecker.INFO_FORMAT_ERR:
+                mPhoneView.setError(getString(R.string.error_invalid_phone));
+                focusView = mPhoneView;
+                cancel = true;
+                break;
+
         }
 
         if (cancel) {
@@ -163,14 +172,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            // TODO: 2017/6/7  
+//            mAuthTask = new UserLoginTask(phoneNumber, password);
+//            mAuthTask.execute((Void) null);
         }
-    }
-
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
     }
 
     /**
