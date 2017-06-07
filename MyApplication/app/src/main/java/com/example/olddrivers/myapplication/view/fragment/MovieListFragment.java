@@ -18,6 +18,7 @@ import com.example.olddrivers.myapplication.R;
 import com.example.olddrivers.myapplication.model.DummyContent;
 import com.example.olddrivers.myapplication.model.DummyContent.DummyItem;
 import com.example.olddrivers.myapplication.model.Movie;
+import com.example.olddrivers.myapplication.view.activity.CinemaChoosingActivity;
 import com.example.olddrivers.myapplication.view.activity.MainActivity;
 import com.example.olddrivers.myapplication.view.activity.MovieDetailActivity;
 import com.example.olddrivers.myapplication.view.adapter.MovieListAdapter;
