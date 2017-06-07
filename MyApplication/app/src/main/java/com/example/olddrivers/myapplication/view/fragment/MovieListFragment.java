@@ -1,6 +1,7 @@
 package com.example.olddrivers.myapplication.view.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,7 +18,9 @@ import com.example.olddrivers.myapplication.R;
 import com.example.olddrivers.myapplication.model.DummyContent;
 import com.example.olddrivers.myapplication.model.DummyContent.DummyItem;
 import com.example.olddrivers.myapplication.model.Movie;
+import com.example.olddrivers.myapplication.view.activity.CinemaChoosingActivity;
 import com.example.olddrivers.myapplication.view.activity.MainActivity;
+import com.example.olddrivers.myapplication.view.activity.MovieDetailActivity;
 import com.example.olddrivers.myapplication.view.adapter.MovieListAdapter;
 
 import java.util.ArrayList;
@@ -81,6 +84,7 @@ public class MovieListFragment extends Fragment implements MovieListAdapter.OnMo
 
     @Override
     public void onItemClick(View view) {
-
+        Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
+        startActivity(intent);
     }
 }
