@@ -37,4 +37,7 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_session_choosing">SessionChoosingActivity</string>
     <string name="title_activity_seat_choosing">SeatChoosing</string>
+    <string name="title_activity_ticket_confirm">TicketConfirm</string>
+    <string name="title_activity_new_ticket_confirm">newTicketConfirm</string>
+    <string name="title_activity_complete_payment">CompletePayment</string>
 </resources>

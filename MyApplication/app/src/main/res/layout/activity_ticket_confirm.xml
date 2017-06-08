@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.olddrivers.myapplication.view.activity.TicketConfirm">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/tc_appBarLayout"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tc_appBarLayout"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:background="#000000">
+
+        <TableRow>
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                style="@style/tc_tableBorder"
+                android:gravity="center"
+                android:text="电影" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/tc_tableBorder"
+                android:layout_marginEnd="1dp"
+                android:src="@mipmap/ww" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                style="@style/tc_tableBorder"
+                android:gravity="center"
+                android:text="场次"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/tc_tableBorder"
+                android:background="#FFFFFF"
+                android:layout_marginEnd="1dp">
+
+                <TextView
+                    android:id="@+id/tc_cinemaName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:text="金逸" />
+
+                <TextView
+                    android:id="@+id/tc_session"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:text="6月10日" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                style="@style/tc_tableBorder"
+                android:gravity="center"
+                android:text="座位"/>
+
+            <GridView
+                android:id="@+id/tc_seats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/tc_tableBorder"
+                android:layout_marginEnd="1dp"
+                android:padding="3dp"
+                android:background="#FFFFFF"
+                android:columnWidth="50dp"
+                android:numColumns="auto_fit"
+                android:stretchMode="columnWidth">
+            </GridView>
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                style="@style/tc_tableBorder"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:text="信息"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/tc_tableBorder"
+                android:background="#FFFFFF"
+                android:layout_marginEnd="1dp"/>
+
+        </TableRow>
+
+    </TableLayout>
+
+    <Button
+        android:id="@+id/btn_ticket_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="提交订单"/>
+
+</RelativeLayout>

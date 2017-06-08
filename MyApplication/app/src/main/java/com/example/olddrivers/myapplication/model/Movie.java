@@ -8,7 +8,7 @@ import java.util.Vector;
 public class Movie {
 
     private String id;
-    private String  name;
+    private String name;
     private String releaseDate;
     private String storyLine;
     private String detai;

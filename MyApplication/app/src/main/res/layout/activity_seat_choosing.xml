@@ -28,29 +28,8 @@
         android:background="#ffffff"
         android:layout_width="wrap_content"
         android:layout_height="300dp"
-        android:layout_gravity=""/>
-
-    <!--<LinearLayout
-        android:id="@+id/selected_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/selected1"
-            style="@style/SelectedSeat"
-            android:text="1行1列" />
-
-        <TextView
-            android:id="@+id/selected2"
-            style="@style/SelectedSeat"
-            android:text="1行1列"/>
-
-        <TextView
-            android:id="@+id/selected3"
-            style="@style/SelectedSeat"
-            android:text="1行1列"/>
-
-    </LinearLayout>-->
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
 
     <GridView
         android:layout_below="@id/seatView"
@@ -66,10 +45,10 @@
     </GridView>
 
     <Button
-        android:id="@+id/btn_dingdan"
+        android:id="@+id/btn_toConfirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="提交订单"/>
+        android:text="确认座位"/>
 
 </RelativeLayout>

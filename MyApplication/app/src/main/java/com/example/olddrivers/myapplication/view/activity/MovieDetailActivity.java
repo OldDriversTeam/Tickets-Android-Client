@@ -22,6 +22,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     ImageView description_expand;
     Button btn_buy;
 
+    Bundle bundle_in;
     FilmItem filmItem;
     int default_description_lines;
 
@@ -40,15 +41,18 @@ public class MovieDetailActivity extends AppCompatActivity {
         description_expand = (ImageView) findViewById(R.id.expand_view);
         btn_buy = (Button) findViewById(R.id.btn_toBuying);
 
+        /*bundle_in = getIntent().getExtras();
+        movie = Movies.get(bundle_in.getInt("position"));*/
+
         filmItem = new FilmItem("神奇女侠", null, null);
 
         default_description_lines = 3;
-        //description_view.setHeight(description_view.getLineHeight() * default_description_lines);
+        description_text.setHeight(description_text.getLineHeight() * default_description_lines);
 
         description_text.post(new Runnable() {
             @Override
             public void run() {
-                //expand_view.setVisibility(description_view.getLineCount() > default_description_lines ? View.VISIBLE : View.GONE);
+                description_expand.setVisibility(description_text.getLineCount() > default_description_lines ? View.VISIBLE : View.GONE);
             }
         });
 
