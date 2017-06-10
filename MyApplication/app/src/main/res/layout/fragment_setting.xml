@@ -138,6 +138,15 @@
                 android:text="修改设置"
                 android:textStyle="bold" />
 
+            <Button
+                android:id="@+id/myticket_button_setting"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="我的电影票"
+                android:textStyle="bold"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
