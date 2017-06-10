@@ -8,6 +8,7 @@ import com.example.olddrivers.myapplication.model.Room;
 import com.example.olddrivers.myapplication.model.Seat;
 import com.example.olddrivers.myapplication.model.Showing;
 import com.example.olddrivers.myapplication.model.Ticket;
+import com.example.olddrivers.myapplication.model.User;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -162,5 +163,84 @@ public class ParseJSON {
         }
         return ticketIds;
     }
-    
+
+    public Ticket getTicketFromTicketId() {
+        Ticket ticket = null;
+        try {
+            String showingId = toParse.getString("showingId");
+            JSONArray jsonArray = toParse.getJSONArray("seat");
+            List<Seat> seats = new ArrayList<>();
+            Seat seat = new Seat(jsonArray.getInt(0), jsonArray.getInt(1));
+            seats.add(seat);
+            ticket = new Ticket(showingId, null, seats.size(), seats);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ticket;
+    }
+
+    public User getUserFromId() {
+        User user = null;
+        try {
+            String id = toParse.getString("id");
+            String name = toParse.getString("name");
+            String password = toParse.getString("password");
+            String gender = toParse.getString("gender");
+            String age = toParse.getString("age");
+            String phone = toParse.getString("phone");
+            String email = toParse.getString("email");
+            String avatar = toParse.getString("avatar");
+            user = new User(id, name, password);
+            user.setGender(gender);
+            user.setAge(age);
+            user.setPhone(phone);
+            user.setEmail(email);
+            user.setAvatar(avatar);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    public String getIdAfterRegister() {
+        String id = null;
+        try {
+            id = toParse.getString("id");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    public String getIdAfterLogin() {
+        String id = null;
+        try {
+            id = toParse.getString("id");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    public Boolean getCheckPhone() {
+        Boolean exits = false;
+        try {
+            exits = toParse.getBoolean("exits");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return exits;
+    }
+
+    public Boolean getUpdateResult() {
+        Boolean result = false;
+        try {
+            result = toParse.getBoolean("result");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }
+
