@@ -98,6 +98,4 @@ public class Ticket {
         this.price = price;
     }
 
-
-
 }

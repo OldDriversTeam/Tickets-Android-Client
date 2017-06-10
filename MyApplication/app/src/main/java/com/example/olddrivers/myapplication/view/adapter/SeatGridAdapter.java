@@ -22,12 +22,14 @@ import org.w3c.dom.Text;
 public class SeatGridAdapter extends BaseAdapter {
     private Context context;
     private List<Seat> seat_loc = new ArrayList<>();
+    private int type;
     private LayoutInflater mInflater;
 
-    public SeatGridAdapter(Context context, List<Seat> seat_loc) {
+    public SeatGridAdapter(Context context, List<Seat> seat_loc, int type) {
         this.context = context;
         this.seat_loc = seat_loc;
-        mInflater = LayoutInflater.from(context);
+        this.type = type;
+        this.mInflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -50,10 +52,20 @@ public class SeatGridAdapter extends BaseAdapter {
         ViewHolder holder = null;
         if (convertView == null)
         {
-            convertView = mInflater.inflate(R.layout.seat_gridview_item, null);
-            holder = new ViewHolder();
-            holder.f_loc = (TextView) convertView.findViewById(R.id.seat_gridview_item);
-            convertView.setTag(holder);
+            switch (type) {
+                case 0:
+                    convertView = mInflater.inflate(R.layout.seat_gridview_item, null);
+                    holder = new ViewHolder();
+                    holder.f_loc = (TextView) convertView.findViewById(R.id.seat_gridview_item);
+                    convertView.setTag(holder);
+                    break;
+                case 1:
+                    convertView = mInflater.inflate(R.layout.seat_gridview_item_tc, null);
+                    holder = new ViewHolder();
+                    holder.f_loc = (TextView) convertView.findViewById(R.id.seat_gridview_item_tc);
+                    convertView.setTag(holder);
+                    break;
+            }
 
         } else
         {

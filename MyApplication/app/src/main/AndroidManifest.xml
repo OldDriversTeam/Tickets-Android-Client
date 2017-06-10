@@ -37,13 +37,32 @@
         <activity
             android:name=".view.activity.SessionChoosingActivity"
             android:label="@string/title_activity_session_choosing"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".view.activity.RegisterActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.activity.RegisterActivity" />
         <activity
             android:name=".view.activity.SeatChoosingActivity"
             android:label="@string/title_activity_seat_choosing"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity android:name=".view.activity.MyTicketsActivity"></activity>
-        </application>
+        <activity
+            android:name=".view.activity.TicketConfirm"
+            android:label="@string/title_activity_ticket_confirm"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.activity.newTicketConfirm"
+            android:label="@string/title_activity_new_ticket_confirm"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.activity.CompletePayment"
+            android:label="@string/title_activity_complete_payment"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
 
 </manifest>
