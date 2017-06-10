@@ -1,6 +1,7 @@
 package com.example.olddrivers.myapplication.server;
 
 import android.accounts.NetworkErrorException;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -72,6 +73,7 @@ public class NetUtils {
 
                 InputStream is = conn.getInputStream();
                 String response = getStringFromInputStream(is);
+
                 return response;
             } else {
                 throw new NetworkErrorException("response status is "+responseCode);

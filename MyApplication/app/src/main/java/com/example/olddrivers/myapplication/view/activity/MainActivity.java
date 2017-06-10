@@ -7,10 +7,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.olddrivers.myapplication.R;
+import com.example.olddrivers.myapplication.server.AsynNetUtils;
 import com.example.olddrivers.myapplication.view.adapter.MainActivityPagerAdapter;
 import com.example.olddrivers.myapplication.view.fragment.MovieListFragment;
 import com.example.olddrivers.myapplication.view.fragment.SettingFragment;
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         resources = getResources();
 
         InitViewPager();
+        
     }
 
     private void InitViewPager() {
