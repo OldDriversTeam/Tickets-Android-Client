@@ -44,6 +44,6 @@
             android:label="@string/title_activity_seat_choosing"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".view.activity.MyTicketsActivity"></activity>
-    </application>
+        </application>
 
 </manifest>
