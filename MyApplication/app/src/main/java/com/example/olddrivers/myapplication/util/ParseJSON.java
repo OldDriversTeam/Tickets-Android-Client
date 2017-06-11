@@ -283,7 +283,7 @@ public class ParseJSON {
         return res;
     }
 
-    public List<Object> getIdAfterLogin() {
+    public List<Object> getUserAfterLogin() {
         List<Object> res = new ArrayList<>();
         try {
             int state = toParse.getInt("state");

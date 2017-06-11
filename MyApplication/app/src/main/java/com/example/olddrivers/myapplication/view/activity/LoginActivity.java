@@ -170,7 +170,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 break;
 
         }
-
+        Log.i("cancel", cancel?"true":"false");
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.

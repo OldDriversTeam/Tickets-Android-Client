@@ -5,6 +5,7 @@ package com.example.olddrivers.myapplication.server;
  */
 
 public class LocalServer {
+    public static String USER_SHARED_PREFERENCES = "user";
     public static String USER_NAME = "user_name";
     public static String USER_PHONE_NUMBER = "user_phone_number";
     public static String USER_PASSWORD = "user_password";

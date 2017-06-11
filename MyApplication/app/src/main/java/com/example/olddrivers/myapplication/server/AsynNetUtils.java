@@ -2,6 +2,7 @@ package com.example.olddrivers.myapplication.server;
 
 import android.graphics.Bitmap;
 import android.os.Handler;
+import android.util.Log;
 
 /**
  * Created by bin on 2017/6/10.
@@ -9,7 +10,7 @@ import android.os.Handler;
 
 public class AsynNetUtils {
 
-    public static String SERVER_ADDRESS = "http://172.18.71.226:8080";
+    public static String SERVER_ADDRESS = "http://211.159.183.245:8080/tickets/";
     public static String GET_CINEMA_BY_ID = "/api/cinemas/";
     public static String GET_MOVIE_BY_ID = "/api/movies/";
     public static String GET_ONSHOW_MOVIES = "/api/movies/onshow";
@@ -26,6 +27,12 @@ public class AsynNetUtils {
     public static String POST_LOGIN = "/api/users/login";
     public static String GET_CHECK_PHONE = "/api/users/";
     public static String POST_UPDATE_USER_INFO = "/api/users/update";
+
+    public static int SUCCESSD = 200;
+    public static int FAILED = 400;
+    public static int PHONE_EXISTED = 401;
+    public static int USER_NOT_EXIST = 402;
+    public static int PASSWORD_ERR = 403;
 
 
     public interface Callback{

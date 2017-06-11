@@ -10,13 +10,18 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.olddrivers.myapplication.R;
+import com.example.olddrivers.myapplication.model.User;
 import com.example.olddrivers.myapplication.server.AsynNetUtils;
 import com.example.olddrivers.myapplication.server.LocalServer;
+import com.example.olddrivers.myapplication.util.ParseJSON;
 
 import org.json.JSONObject;
 import org.json.JSONStringer;
+
+import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -48,10 +53,22 @@ public class RegisterActivity extends AppCompatActivity {
                 AsynNetUtils.post(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.POST_REGISTER, jsonObject.toString(), new AsynNetUtils.Callback() {
                     @Override
                     public void onResponse(String response) {
-                        SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
-//                        sp.edit().putString(LocalServer.USER_NAME, ).putString(LocalServer.USER_PHONE_NUMBER, ).putString(LocalServer.USER_PASSWORD, );
-                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                        RegisterActivity.this.startActivity(intent);
+                        ParseJSON parseJSON = new ParseJSON(response);
+                        List<Object> list = parseJSON.getUserAfterLogin();
+                        if ((int)list.get(0) == AsynNetUtils.SUCCESSD) {
+                            User user = (User)list.get(1);
+                            SharedPreferences sp = getSharedPreferences(LocalServer.USER_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+                            Log.i("name", user.getName());
+                            sp.edit().putString(LocalServer.USER_NAME, user.getName())
+                                    .putString(LocalServer.USER_PHONE_NUMBER, user.getPhone())
+                                    .putString(LocalServer.USER_PASSWORD, user.getPassword()).commit();
+                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                            RegisterActivity.this.startActivity(intent);
+
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_LONG);
+                        }
+
                     }
                 });
 
