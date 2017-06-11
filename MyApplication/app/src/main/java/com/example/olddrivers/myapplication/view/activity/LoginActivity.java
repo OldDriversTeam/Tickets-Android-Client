@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.olddrivers.myapplication.R;
+import com.example.olddrivers.myapplication.server.AsynNetUtils;
 import com.example.olddrivers.myapplication.util.InfoChecker;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -49,11 +50,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
-
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private UserLoginTask mAuthTask = null;
 
     // UI references.
     private AutoCompleteTextView mPhoneView;
@@ -131,9 +127,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
+        // TODO: 2017/6/11 防止多次登录
 
         // Reset errors.
         mPhoneView.setError(null);
@@ -185,9 +179,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            // TODO: 2017/6/7  
-//            mAuthTask = new UserLoginTask(phoneNumber, password);
-//            mAuthTask.execute((Void) null);
+//            // TODO: 2017/6/7
+//            AsynNetUtils.get("url", new AsynNetUtils.Callback() {
+//                @Override
+//                public void onResponse(String response) {
+//                    textview.settext(response);
+//                }
+//            });
+////            mAuthTask = new UserLoginTask(phoneNumber, password);
+////            mAuthTask.execute((Void) null);
         }
     }
 
@@ -281,47 +281,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         int IS_PRIMARY = 1;
     }
 
-    /**
-     * Represents an asynchronous login/registration task
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-
-
-            // TODO: register the new account here.
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
-    }
 }
 

@@ -7,6 +7,26 @@ import android.os.Handler;
  */
 
 public class AsynNetUtils {
+
+    public static String SERVER_ADDRESS = "http://211.159.183.245:8080/tickets";
+    public static String GET_CINEMA_BY_ID = "/api/cinemas/";
+    public static String GET_MOVIE_BY_ID = "/api/movies/";
+    public static String GET_ONSHOW_MOVIES = "/api/movies/onshow";
+    public static String GET_ROOM_BY_ID = "/api/rooms/";
+    public static String GET_SHOW_BY_ID = "/api/showings/";
+    public static String GET_SHOWS_BY_MOVIE_ID = "/api/showings/movie/";
+    public static String GET_SHOWS_BY_DATA_CINEMA = "/api/showings/cinema/"; //GET /api/showings/cinema/{cinemaId}/date/{date}movie/{movieId}
+    public static String POST_BUY_TICKETS = "/api/tickets/order";
+    public static String GET_SOLD_SEAT_BY_SHOW = "/api/tickets/showing/";
+    public static String GET_TICKETS_BY_USER_ID = "/api/tickets/user/";
+    public static String GET_TICKET_INFO_BY_ID = "/api/tickets/";
+    public static String GET_USER_INFO_BY_ID = "/api/users/";
+    public static String POST_REGISTER = "/api/users/register";
+    public static String POST_LOGIN = "/api/users/login";
+    public static String GET_CHECK_PHONE = "/api/users/";
+    public static String POST_UPDATE_USER_INFO = "/api/users/update";
+
+
     public interface Callback{
         void onResponse(String response);
     }
