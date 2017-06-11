@@ -50,7 +50,7 @@ public class CompletePayment extends AppCompatActivity {
                         "{\"date\":\"date1\"," + "\"cinemaIdList\":[\"cinema1\"," + "\"cinema2\"]}" +
                         "]}";
                 //Toast.makeText(CompletePayment.this, test, Toast.LENGTH_SHORT).show();
-                try {
+                /*try {
                     JSONObject jsonObject = new JSONObject(test);
                     Log.i("size", test);
                     ParseJSON parseJSON = new ParseJSON(jsonObject);
@@ -60,7 +60,7 @@ public class CompletePayment extends AppCompatActivity {
                     Toast.makeText(CompletePayment.this, String.valueOf(showings.size()), Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
-                }
+                }*/
 
 
             }
