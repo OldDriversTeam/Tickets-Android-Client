@@ -62,7 +62,6 @@ public class CompletePayment extends AppCompatActivity {
 //                    e.printStackTrace();
 //                }
 
-
             }
         });
     }

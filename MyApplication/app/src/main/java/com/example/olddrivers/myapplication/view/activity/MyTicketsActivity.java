@@ -25,7 +25,8 @@ public class MyTicketsActivity extends AppCompatActivity implements MyTicketsLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_tickets);
-        list.add(new Ticket("1", "2", new Seat(1,1)));
+
+        list.add(new Ticket("1", "2", new Seat(1, 2)));
 
         setList();
 
