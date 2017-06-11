@@ -88,9 +88,11 @@ public class ParseJSON {
                 JSONObject showingListObject = jsonArray.getJSONObject(i);
                 String id = showingListObject.getString("id");
                 String name = showingListObject.getString("name");
-                String poster = showingListObject.getString("poster");
                 String avgScore = showingListObject.getString("avgScore");
+                String poster = showingListObject.getString("poster");
+                String storyLine = showingListObject.getString("storyLine");
                 Movie movie = new Movie(id, name, Float.valueOf(avgScore), poster);
+                movie.setStoryLine(storyLine);
                 movies.add(movie);
             }
         } catch (Exception e) {
@@ -125,13 +127,19 @@ public class ParseJSON {
             for (int i = 0; i < size; i++) {
                 JSONObject showingListObject = jsonArray.getJSONObject(i);
                 String date = showingListObject.getString("date");
-                JSONArray cinemaIdList = showingListObject.getJSONArray("cinemaIdList");
-                for (int j = 0; j < cinemaIdList.length(); j++) {
-                    String cinemaId = cinemaIdList.getString(j);
-                    Showing showing = new Showing(null, date, null, null, null, cinemaId, null);
-                    showings.add(showing);
+                JSONArray cinemaList = showingListObject.getJSONArray("cinemaList");
+                Showing showing = new Showing(null, date, null, null, null, null, null);
+                List<Cinema> cinemas = new ArrayList<>();
+                for (int j = 0; j < cinemaList.length(); j++) {
+                    JSONObject cinemaObject = cinemaList.getJSONObject(j);
+                    String id = cinemaObject.getString("id");
+                    String name = cinemaObject.getString("name");
+                    Cinema cinema = new Cinema(id, name, null, null, null);
+                    showing.setCinemaId(id);
+                    cinemas.add(cinema);
                 }
-
+                showing.setCinemaList(cinemas);
+                showings.add(showing);
             }
         } catch (Exception e) {
             e.printStackTrace();

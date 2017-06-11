@@ -85,7 +85,7 @@ public class MovieListFragment extends Fragment implements MovieListAdapter.OnMo
                 Log.i("image", response);
                 ParseJSON parseJSON = new ParseJSON(response);
                 list = parseJSON.getOnshowMovies();
-
+                Log.i("ddddddddddddd", list.get(0).getId());
                 MovieListAdapter ma = new MovieListAdapter(list, MovieListFragment.this);
                 listView.setAdapter(ma);
             }
