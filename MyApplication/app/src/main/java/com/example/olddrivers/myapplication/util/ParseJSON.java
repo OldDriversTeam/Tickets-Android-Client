@@ -23,8 +23,13 @@ import java.util.List;
 public class ParseJSON {
     private JSONObject toParse;
 
-    public ParseJSON(JSONObject toParse) {
-        this.toParse = toParse;
+    public ParseJSON(String toParse) {
+        try {
+            JSONObject jsonObject = new JSONObject(toParse);
+            this.toParse = jsonObject;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setToParse(JSONObject toParse) {
@@ -50,6 +55,50 @@ public class ParseJSON {
         return cinema;
     }
 
+    public Movie getMovieFromId() {
+        Movie movie = null;
+        try {
+            String id = toParse.getString("id");
+            String name = toParse.getString("name");
+            String releaseDate = toParse.getString("releaseDate");
+            String storyLine = toParse.getString("storyLine");
+            String detail = toParse.getString("detail");
+            String poster = toParse.getString("poster");
+            String avgScore = toParse.getString("avgScore");
+            Boolean isShow = toParse.getBoolean("isShow");
+            String movieType = toParse.getString("movieType");
+            movie = new Movie(id, name, Float.valueOf(avgScore), poster);
+            movie.setReleaseDate(releaseDate);
+            movie.setStoryLine(storyLine);
+            movie.setDetai(detail);
+            movie.setMovieType(movieType);
+            movie.setShow(isShow);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return movie;
+    }
+
+    public List<Movie> getOnshowMovies() {
+        List<Movie> movies = new ArrayList<>();
+        try {
+            int size = toParse.getInt("size");
+            JSONArray jsonArray = toParse.getJSONArray("movieList");
+            for (int i = 0; i < size; i++) {
+                JSONObject showingListObject = jsonArray.getJSONObject(i);
+                String id = toParse.getString("id");
+                String name = toParse.getString("name");
+                String poster = toParse.getString("poster");
+                String avgScore = toParse.getString("avgScore");
+                Movie movie = new Movie(id, name, Float.valueOf(avgScore), poster);
+                movies.add(movie);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return movies;
+    }
+
     public Showing getShowingFromId() {
         Showing showing = null;
         try {
@@ -69,7 +118,6 @@ public class ParseJSON {
 
     public List<Showing> getShowingsFromMovieId() {
         List<Showing> showings = new ArrayList<>();
-        Log.i("size", "dfdfdfdfdf");
         try {
             int size = toParse.getInt("size");
             JSONArray jsonArray = toParse.getJSONArray("showinglist");
