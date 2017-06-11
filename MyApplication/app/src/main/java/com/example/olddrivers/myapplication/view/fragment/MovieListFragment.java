@@ -18,6 +18,7 @@ import com.example.olddrivers.myapplication.R;
 import com.example.olddrivers.myapplication.model.DummyContent;
 import com.example.olddrivers.myapplication.model.DummyContent.DummyItem;
 import com.example.olddrivers.myapplication.model.Movie;
+import com.example.olddrivers.myapplication.server.AsynNetUtils;
 import com.example.olddrivers.myapplication.view.activity.CinemaChoosingActivity;
 import com.example.olddrivers.myapplication.view.activity.MainActivity;
 import com.example.olddrivers.myapplication.view.activity.MovieDetailActivity;
@@ -47,8 +48,6 @@ public class MovieListFragment extends Fragment implements MovieListAdapter.OnMo
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_movie_list, container, false);
 
-        list.add(new Movie("1", "zhang", 10, "ddd"));
-
         setSearch();
 
         setList();
@@ -77,6 +76,7 @@ public class MovieListFragment extends Fragment implements MovieListAdapter.OnMo
 
     private void setList() {
         //列表
+//        AsynNetUtils.get("");
         RecyclerView listView = (RecyclerView) view.findViewById(R.id.movie_list);
         MovieListAdapter ma = new MovieListAdapter(list, this);
         listView.setAdapter(ma);
