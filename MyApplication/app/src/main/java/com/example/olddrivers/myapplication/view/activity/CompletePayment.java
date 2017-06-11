@@ -50,17 +50,17 @@ public class CompletePayment extends AppCompatActivity {
                         "{\"date\":\"date1\"," + "\"cinemaIdList\":[\"cinema1\"," + "\"cinema2\"]}" +
                         "]}";
                 //Toast.makeText(CompletePayment.this, test, Toast.LENGTH_SHORT).show();
-                try {
-                    JSONObject jsonObject = new JSONObject(test);
-                    Log.i("size", test);
-                    ParseJSON parseJSON = new ParseJSON(jsonObject);
-                    List<Showing> showings = parseJSON.getShowingsFromMovieId();
-                    //Toast.makeText(CompletePayment.this, showings.get(0).getDate() + "\n" + showings.get(1).getCinemaId(), Toast.LENGTH_SHORT).show();
-                    Log.i("sizeOfShowings", String.valueOf(showings.size()));
-                    Toast.makeText(CompletePayment.this, String.valueOf(showings.size()), Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    JSONObject jsonObject = new JSONObject(test);
+//                    Log.i("size", test);
+//                    ParseJSON parseJSON = new ParseJSON(jsonObject);
+//                    List<Showing> showings = parseJSON.getShowingsFromMovieId();
+//                    //Toast.makeText(CompletePayment.this, showings.get(0).getDate() + "\n" + showings.get(1).getCinemaId(), Toast.LENGTH_SHORT).show();
+//                    Log.i("sizeOfShowings", String.valueOf(showings.size()));
+//                    Toast.makeText(CompletePayment.this, String.valueOf(showings.size()), Toast.LENGTH_SHORT).show();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
 
 
             }

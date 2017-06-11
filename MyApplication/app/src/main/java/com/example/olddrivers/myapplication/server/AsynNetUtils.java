@@ -1,5 +1,6 @@
 package com.example.olddrivers.myapplication.server;
 
+import android.graphics.Bitmap;
 import android.os.Handler;
 
 /**
@@ -8,7 +9,7 @@ import android.os.Handler;
 
 public class AsynNetUtils {
 
-    public static String SERVER_ADDRESS = "http://211.159.183.245:8080/tickets";
+    public static String SERVER_ADDRESS = "http://172.18.71.226:8080";
     public static String GET_CINEMA_BY_ID = "/api/cinemas/";
     public static String GET_MOVIE_BY_ID = "/api/movies/";
     public static String GET_ONSHOW_MOVIES = "/api/movies/onshow";
@@ -29,6 +30,10 @@ public class AsynNetUtils {
 
     public interface Callback{
         void onResponse(String response);
+    }
+
+    public interface BitmapCallback{
+        void onResponse(Bitmap response);
     }
 
     public static void get(final String url, final Callback callback){
@@ -53,6 +58,22 @@ public class AsynNetUtils {
             @Override
             public void run() {
                 final String response = NetUtils.post(url,content);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onResponse(response);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    public static void getBitmap(final String url, final BitmapCallback callback){
+        final Handler handler = new Handler();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final Bitmap response = NetUtils.getBitmapFromURL(url);
                 handler.post(new Runnable() {
                     @Override
                     public void run() {

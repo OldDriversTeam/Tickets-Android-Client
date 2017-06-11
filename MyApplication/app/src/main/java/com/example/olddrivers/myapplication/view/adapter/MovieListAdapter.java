@@ -1,6 +1,7 @@
 package com.example.olddrivers.myapplication.view.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +12,10 @@ import android.widget.TextView;
 
 import com.example.olddrivers.myapplication.R;
 import com.example.olddrivers.myapplication.model.Movie;
+import com.example.olddrivers.myapplication.server.AsynNetUtils;
 
 
+import android.net.Uri;
 import java.util.List;
 
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.ViewHolder> {
@@ -35,7 +38,12 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.item = list.get(position);
-        holder.imageView.setImageResource(R.mipmap.movie);
+        AsynNetUtils.getBitmap(holder.item.getPoster(), new AsynNetUtils.BitmapCallback() {
+            @Override
+            public void onResponse(Bitmap response) {
+                holder.imageView.setImageBitmap(response);
+            }
+        });
         holder.name.setText(holder.item.getName());
         holder.score.setText(String.valueOf(holder.item.getAvgScore()));
         holder.message.setText(holder.item.getDetai());
@@ -43,11 +51,12 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
-                    mListener.onItemClick(holder.mView);
-                }
+            if (null != mListener) {
+                mListener.onItemClick(holder.mView);
+            }
             }
         });
+
     }
 
     @Override

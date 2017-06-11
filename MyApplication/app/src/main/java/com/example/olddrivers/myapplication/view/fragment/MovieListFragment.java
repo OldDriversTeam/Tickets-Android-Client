@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,16 +78,19 @@ public class MovieListFragment extends Fragment implements MovieListAdapter.OnMo
 
     private void setList() {
         //列表
+        final RecyclerView listView = (RecyclerView) view.findViewById(R.id.movie_list);
         AsynNetUtils.get(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_ONSHOW_MOVIES, new AsynNetUtils.Callback() {
             @Override
             public void onResponse(String response) {
+                Log.i("image", response);
                 ParseJSON parseJSON = new ParseJSON(response);
-                parseJSON.
+                list = parseJSON.getOnshowMovies();
+
+                MovieListAdapter ma = new MovieListAdapter(list, MovieListFragment.this);
+                listView.setAdapter(ma);
             }
         });
-        RecyclerView listView = (RecyclerView) view.findViewById(R.id.movie_list);
-        MovieListAdapter ma = new MovieListAdapter(list, this);
-        listView.setAdapter(ma);
+
     }
 
     @Override

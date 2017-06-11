@@ -86,10 +86,10 @@ public class ParseJSON {
             JSONArray jsonArray = toParse.getJSONArray("movieList");
             for (int i = 0; i < size; i++) {
                 JSONObject showingListObject = jsonArray.getJSONObject(i);
-                String id = toParse.getString("id");
-                String name = toParse.getString("name");
-                String poster = toParse.getString("poster");
-                String avgScore = toParse.getString("avgScore");
+                String id = showingListObject.getString("id");
+                String name = showingListObject.getString("name");
+                String poster = showingListObject.getString("poster");
+                String avgScore = showingListObject.getString("avgScore");
                 Movie movie = new Movie(id, name, Float.valueOf(avgScore), poster);
                 movies.add(movie);
             }
