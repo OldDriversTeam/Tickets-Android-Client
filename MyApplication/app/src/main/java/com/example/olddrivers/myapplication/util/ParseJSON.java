@@ -23,8 +23,13 @@ import java.util.List;
 public class ParseJSON {
     private JSONObject toParse;
 
-    public ParseJSON(JSONObject toParse) {
-        this.toParse = toParse;
+    public ParseJSON(String toParse) {
+        try {
+            JSONObject jsonObject = new JSONObject(toParse);
+            this.toParse = jsonObject;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setToParse(JSONObject toParse) {

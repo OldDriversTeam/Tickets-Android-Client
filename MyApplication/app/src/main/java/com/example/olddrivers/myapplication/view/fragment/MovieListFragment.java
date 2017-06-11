@@ -19,6 +19,7 @@ import com.example.olddrivers.myapplication.model.DummyContent;
 import com.example.olddrivers.myapplication.model.DummyContent.DummyItem;
 import com.example.olddrivers.myapplication.model.Movie;
 import com.example.olddrivers.myapplication.server.AsynNetUtils;
+import com.example.olddrivers.myapplication.util.ParseJSON;
 import com.example.olddrivers.myapplication.view.activity.CinemaChoosingActivity;
 import com.example.olddrivers.myapplication.view.activity.MainActivity;
 import com.example.olddrivers.myapplication.view.activity.MovieDetailActivity;
@@ -76,7 +77,13 @@ public class MovieListFragment extends Fragment implements MovieListAdapter.OnMo
 
     private void setList() {
         //列表
-//        AsynNetUtils.get("");
+        AsynNetUtils.get(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_ONSHOW_MOVIES, new AsynNetUtils.Callback() {
+            @Override
+            public void onResponse(String response) {
+                ParseJSON parseJSON = new ParseJSON(response);
+                parseJSON.
+            }
+        });
         RecyclerView listView = (RecyclerView) view.findViewById(R.id.movie_list);
         MovieListAdapter ma = new MovieListAdapter(list, this);
         listView.setAdapter(ma);
