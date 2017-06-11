@@ -169,10 +169,8 @@ public class ParseJSON {
         try {
             String showingId = toParse.getString("showingId");
             JSONArray jsonArray = toParse.getJSONArray("seat");
-            List<Seat> seats = new ArrayList<>();
             Seat seat = new Seat(jsonArray.getInt(0), jsonArray.getInt(1));
-            seats.add(seat);
-            ticket = new Ticket(showingId, null, seats.size(), seats);
+            ticket = new Ticket(showingId, null, seat);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -243,4 +241,3 @@ public class ParseJSON {
     }
 
 }
-
