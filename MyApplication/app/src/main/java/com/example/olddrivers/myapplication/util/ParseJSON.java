@@ -248,24 +248,60 @@ public class ParseJSON {
         return user;
     }
 
-    public String getIdAfterRegister() {
-        String id = null;
+    public List<Object> getIdAfterRegister() {
+        List<Object> res = new ArrayList<>();
         try {
-            id = toParse.getString("id");
+            int state = toParse.getInt("state");
+            JSONObject jsonObject = toParse.getJSONObject("user");
+            String id = jsonObject.getString("id");
+            String name = jsonObject.getString("name");
+            String password = jsonObject.getString("password");
+            String gender = jsonObject.getString("gender");
+            String age = jsonObject.getString("age");
+            String phone = jsonObject.getString("phone");
+            String email = jsonObject.getString("email");
+            String avatar = jsonObject.getString("avatar");
+            User user = new User(id, name, password);
+            user.setGender(gender);
+            user.setAge(age);
+            user.setPhone(phone);
+            user.setEmail(email);
+            user.setAvatar(avatar);
+            res.add(state);
+            res.add(user);
+            User test = (User) res.get(1);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return id;
+        return res;
     }
 
-    public String getIdAfterLogin() {
-        String id = null;
+    public List<Object> getIdAfterLogin() {
+        List<Object> res = new ArrayList<>();
         try {
-            id = toParse.getString("id");
+            int state = toParse.getInt("state");
+            JSONObject jsonObject = toParse.getJSONObject("user");
+            String id = jsonObject.getString("id");
+            String name = jsonObject.getString("name");
+            String password = jsonObject.getString("password");
+            String gender = jsonObject.getString("gender");
+            String age = jsonObject.getString("age");
+            String phone = jsonObject.getString("phone");
+            String email = jsonObject.getString("email");
+            String avatar = jsonObject.getString("avatar");
+            User user = new User(id, name, password);
+            user.setGender(gender);
+            user.setAge(age);
+            user.setPhone(phone);
+            user.setEmail(email);
+            user.setAvatar(avatar);
+            res.add(state);
+            res.add(user);
+            User test = (User) res.get(1);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return id;
+        return res;
     }
 
     public Boolean getCheckPhone() {
