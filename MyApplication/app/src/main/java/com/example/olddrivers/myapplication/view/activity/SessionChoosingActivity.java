@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.olddrivers.myapplication.R;
+import com.example.olddrivers.myapplication.model.Cinema;
+import com.example.olddrivers.myapplication.model.Movie;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -23,10 +25,16 @@ public class SessionChoosingActivity extends AppCompatActivity {
     TextView cinema_name;
     TextView movie_name;
     ListView listview;
+
+    Cinema cinema;
+    Movie movie;
+    String date;
     List<Map<String, Object>> session_data;
     List<String> detailStart;
     List<String> detailEnd;
     SimpleAdapter simpleAdapter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +49,16 @@ public class SessionChoosingActivity extends AppCompatActivity {
 
     void initialize() {
         Bundle bundle_in = getIntent().getExtras();
-        Toast.makeText(this, bundle_in.getString("cinema_name"), Toast.LENGTH_SHORT).show();
+        cinema = (Cinema) bundle_in.getSerializable("cinema");
+        movie = (Movie) bundle_in.getSerializable("movie");
+        date = bundle_in.getString("date");
 
         cinema_name = (TextView) findViewById(R.id.ss_cinema_name);
         movie_name = (TextView) findViewById(R.id.ss_movie_name);
         listview = (ListView) findViewById(R.id.ss_listview);
+
+        cinema_name.setText(cinema.getName());
+        movie_name.setText(movie.getName());
 
         session_data = new ArrayList<>();
         detailStart = new ArrayList<>();

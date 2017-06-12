@@ -110,8 +110,9 @@ public class CinemaChoosingActivity extends AppCompatActivity {
         private static final String ARG_SECTION_NUMBER = "section_number";
         List<Map<String, Object>> data = new ArrayList<>();
         List<Cinema> cinemas;
-        final List<String> cinemaNames = new ArrayList<>();
-        final List<String> cinemaIds = new ArrayList<>();
+        String date;
+        List<String> cinemaNames = new ArrayList<>();
+        List<String> cinemaIds = new ArrayList<>();
         SimpleAdapter simpleAdapter;
         public PlaceholderFragment() {
         }
@@ -149,6 +150,7 @@ public class CinemaChoosingActivity extends AppCompatActivity {
                     Log.i("response", response);
                     List<Showing> new_showings = json.getShowingsFromMovieId();
                     int index = getArguments().getInt(ARG_SECTION_NUMBER);
+                    date = new_showings.get(index).getDate();
                     cinemas = new_showings.get(index).getCinemaList();
 
                     for (int i = 0; i < cinemas.size(); i++) {
@@ -173,13 +175,9 @@ public class CinemaChoosingActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent = new Intent(getActivity(), SessionChoosingActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("cinema_name", cinemaNames.get(position));
-
-                    int index = getArguments().getInt(ARG_SECTION_NUMBER);
-                    Calendar calendar = Calendar.getInstance();
-                    bundle.putInt("month", calendar.get(Calendar.MONTH) + 1);
-                    bundle.putInt("date", calendar.get(Calendar.DAY_OF_MONTH) + index);
-
+                    bundle.putSerializable("cinema", cinemas.get(position));
+                    bundle.putSerializable("movie", movie);
+                    bundle.putString("date", date);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
