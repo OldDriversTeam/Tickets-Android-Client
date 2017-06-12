@@ -7,9 +7,9 @@
     tools:context="com.example.olddrivers.myapplication.view.activity.MovieDetailActivity">
 
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:orientation="horizontal">
+        android:layout_height="250dp">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -26,52 +26,147 @@
             android:layout_gravity="center">
 
             <TextView
-                android:id="@+id/film_name"
-               style="@style/FilmBriefImformation"
+                android:id="@+id/filmDetail_name"
+               style="@style/FilmBriefInformation"
                 android:text="神奇女侠"/>
 
             <TextView
-                android:id="@+id/film_date"
-                style="@style/FilmBriefImformation"
-                android:text="上映日期：2017-06-02"/>
+                style="@style/FilmBriefInformation"
+                android:text="上映日期："/>
 
             <TextView
-                android:id="@+id/film_actors"
-                style="@style/FilmBriefImformation"
-                android:text="主演：盖尔·加朵\n克里斯·派恩"/>
+                android:id="@+id/filmDetail_date"
+                style="@style/FilmBriefInformation"
+                android:text="2017-06-02"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <TextView
+                    style="@style/FilmBriefInformation"
+                    android:layout_width="wrap_content"
+                    android:text="评分："/>
+
+                <TextView
+                    android:id="@+id/fimeDetail_score"
+                    style="@style/FilmBriefInformation"
+                    android:layout_width="wrap_content"
+                    android:text="9.0"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/description_layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/description_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="18dip"
-            android:text="戴安娜·普林斯（盖尔·加朵饰）生活在亚马逊天堂岛，岛上只有女性，作为众神之王宙斯与亚马逊女王希波吕忒（康妮·尼尔森饰）的女儿，在她的成长过程中，一直受到母亲和姨母安提俄珀（罗宾·怀特饰）的悉心呵护。直到有一天，一架战机坠入天堂岛附近海域，戴安娜的平静生活由此被打破。戴安娜将坠海的飞行员史蒂夫（克里斯·派恩饰）救起，但其母亲对这位普通男人的世界没有一点兴趣。史蒂夫强调自己的目标是结束第一次世界大战，而戴安娜则认为这场人类的浩劫或许是战神阿瑞斯捣的鬼，于是决定与史蒂夫一起前往战争前线，第一次亲身体验到了人类战争的威力，并逐渐理解了身为英雄的意义和代价。">
+            style="@style/FilmInformationTitle"
+            android:text="剧情简介：">
         </TextView>
 
-        <ImageView
-            android:id="@+id/expand_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:paddingBottom="5dip"
-            android:paddingLeft="5dip"
-            android:paddingRight="5dip"
-            android:paddingTop="5dip"
-            android:src="@mipmap/text_ic_expand"
-            android:visibility="gone" />
+        <LinearLayout
+            android:id="@+id/description_layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ScrollView
+                android:id="@+id/description_scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/description_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:textSize="18dip"
+                        android:text="戴安娜·普林斯（盖尔·加朵饰）生活在亚马逊天堂岛，岛上只有女性，作为众神之王宙斯与亚马逊女王希波吕忒（康妮·尼尔森饰）的女儿，在她的成长过程中，一直受到母亲和姨母安提俄珀（罗宾·怀特饰）的悉心呵护。直到有一天，一架战机坠入天堂岛附近海域，戴安娜的平静生活由此被打破。戴安娜将坠海的飞行员史蒂夫（克里斯·派恩饰）救起，但其母亲对这位普通男人的世界没有一点兴趣。史蒂夫强调自己的目标是结束第一次世界大战，而戴安娜则认为这场人类的浩劫或许是战神阿瑞斯捣的鬼，于是决定与史蒂夫一起前往战争前线，第一次亲身体验到了人类战争的威力，并逐渐理解了身为英雄的意义和代价。戴安娜·普林斯（盖尔·加朵饰）生活在亚马逊天堂岛，岛上只有女性，作为众神之王宙斯与亚马逊女王希波吕忒（康妮·尼尔森饰）的女儿，在她的成长过程中，一直受到母亲和姨母安提俄珀（罗宾·怀特饰）的悉心呵护。直到有一天，一架战机坠入天堂岛附近海域，戴安娜的平静生活由此被打破。戴安娜将坠海的飞行员史蒂夫（克里斯·派恩饰）救起，但其母亲对这位普通男人的世界没有一点兴趣。史蒂夫强调自己的目标是结束第一次世界大战，而戴安娜则认为这场人类的浩劫或许是战神阿瑞斯捣的鬼，于是决定与史蒂夫一起前往战争前线，第一次亲身体验到了人类战争的威力，并逐渐理解了身为英雄的意义和代价。"
+                        >
+                    </TextView>
+
+                    <ImageView
+                        android:id="@+id/expand_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:paddingBottom="5dip"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:paddingTop="5dip"
+                        android:src="@mipmap/text_ic_expand" />
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/FilmInformationTitle"
+            android:text="制作详情：">
+        </TextView>
+
+        <LinearLayout
+            android:id="@+id/detail_layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ScrollView
+                android:id="@+id/detail_scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/detail_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:textSize="18dip"
+                        android:text="戴安娜·普林斯（盖尔·加朵饰）生活在亚马逊天堂岛，岛上只有女性，作为众神之王宙斯与亚马逊女王希波吕忒（康妮·尼尔森饰）的女儿，在她的成长过程中，一直受到母亲和姨母安提俄珀（罗宾·怀特饰）的悉心呵护。直到有一天，一架战机坠入天堂岛附近海域，戴安娜的平静生活由此被打破。戴安娜将坠海的飞行员史蒂夫（克里斯·派恩饰）救起，但其母亲对这位普通男人的世界没有一点兴趣。史蒂夫强调自己的目标是结束第一次世界大战，而戴安娜则认为这场人类的浩劫或许是战神阿瑞斯捣的鬼，于是决定与史蒂夫一起前往战争前线，第一次亲身体验到了人类战争的威力，并逐渐理解了身为英雄的意义和代价。戴安娜·普林斯（盖尔·加朵饰）生活在亚马逊天堂岛，岛上只有女性，作为众神之王宙斯与亚马逊女王希波吕忒（康妮·尼尔森饰）的女儿，在她的成长过程中，一直受到母亲和姨母安提俄珀（罗宾·怀特饰）的悉心呵护。直到有一天，一架战机坠入天堂岛附近海域，戴安娜的平静生活由此被打破。戴安娜将坠海的飞行员史蒂夫（克里斯·派恩饰）救起，但其母亲对这位普通男人的世界没有一点兴趣。史蒂夫强调自己的目标是结束第一次世界大战，而戴安娜则认为这场人类的浩劫或许是战神阿瑞斯捣的鬼，于是决定与史蒂夫一起前往战争前线，第一次亲身体验到了人类战争的威力，并逐渐理解了身为英雄的意义和代价。"
+                        >
+                    </TextView>
+
+                    <ImageView
+                        android:id="@+id/detail_expand_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:paddingBottom="5dip"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:paddingTop="5dip"
+                        android:src="@mipmap/text_ic_expand" />
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
+
     </LinearLayout>
+    
+
 
     <Button
         android:id="@+id/btn_toBuying"

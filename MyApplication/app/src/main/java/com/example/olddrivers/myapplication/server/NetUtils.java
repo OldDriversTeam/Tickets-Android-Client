@@ -1,6 +1,8 @@
 package com.example.olddrivers.myapplication.server;
 
 import android.accounts.NetworkErrorException;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
@@ -27,6 +29,7 @@ public class NetUtils {
             conn.setReadTimeout(5000);// 设置读取超时为5秒
             conn.setConnectTimeout(10000);// 设置连接网络超时为10秒
             conn.setDoOutput(true);// 设置此方法,允许向服务器输出内容
+            conn.setRequestProperty("Content-type", "application/json;charset=UTF-8");
 
             // post请求的参数
             String data = content;
@@ -104,5 +107,20 @@ public class NetUtils {
         String state = os.toString();// 把流中的数据转换成字符串,采用的编码是utf-8(模拟器默认编码)
         os.close();
         return state;
+    }
+
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

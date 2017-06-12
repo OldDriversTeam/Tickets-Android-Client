@@ -3,7 +3,9 @@ package com.example.olddrivers.myapplication.view.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -36,7 +38,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.olddrivers.myapplication.R;
+import com.example.olddrivers.myapplication.model.User;
+import com.example.olddrivers.myapplication.server.AsynNetUtils;
+import com.example.olddrivers.myapplication.server.LocalServer;
 import com.example.olddrivers.myapplication.util.InfoChecker;
+import com.example.olddrivers.myapplication.util.ParseJSON;
+
+import org.json.JSONObject;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -49,11 +57,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
-
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private UserLoginTask mAuthTask = null;
 
     // UI references.
     private AutoCompleteTextView mPhoneView;
@@ -108,9 +111,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         loginButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-//                attemptLogin();
+                attemptLogin();
             }
         });
 
@@ -131,9 +132,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
+        // TODO: 2017/6/11 防止多次登录
 
         // Reset errors.
         mPhoneView.setError(null);
@@ -178,16 +177,42 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
+
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            showProgress(true);
-            // TODO: 2017/6/7  
-//            mAuthTask = new UserLoginTask(phoneNumber, password);
-//            mAuthTask.execute((Void) null);
+
+//            showProgress(true);
+
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("phone", phoneNumber);
+                jsonObject.put("password", password);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            AsynNetUtils.post(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.POST_LOGIN, jsonObject.toString(), new AsynNetUtils.Callback() {
+                @Override
+                public void onResponse(String response) {
+
+                    Log.i("state", response + " ");
+                    ParseJSON parseJSON = new ParseJSON(response);
+                    List<Object> list = parseJSON.getUserAfterLogin();
+                    if (list.size() != 0 && (int)list.get(0) == AsynNetUtils.SUCCESSD) {
+                        User user = (User)list.get(1);
+                        SharedPreferences sp = getSharedPreferences(LocalServer.USER_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+                        sp.edit().putString(LocalServer.USER_NAME, user.getName())
+                                .putString(LocalServer.USER_PHONE_NUMBER, user.getPhone())
+                                .putString(LocalServer.USER_PASSWORD, user.getPassword()).commit();
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    } else {
+                        Toast.makeText(LoginActivity.this, "账号密码错误，登录失败", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            });
         }
     }
 
@@ -281,47 +306,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         int IS_PRIMARY = 1;
     }
 
-    /**
-     * Represents an asynchronous login/registration task
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-
-
-            // TODO: register the new account here.
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
-    }
 }
 

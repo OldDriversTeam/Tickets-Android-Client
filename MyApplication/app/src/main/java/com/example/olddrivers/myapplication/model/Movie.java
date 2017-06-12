@@ -5,10 +5,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 
-public class Movie {
+public class Movie implements Serializable {
 
     private String id;
-    private String  name;
+    private String name;
     private String releaseDate;
     private String storyLine;
     private String detai;

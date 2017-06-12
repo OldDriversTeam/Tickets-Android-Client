@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import com.example.olddrivers.myapplication.R;
 import com.example.olddrivers.myapplication.model.DummyContent;
 import com.example.olddrivers.myapplication.model.DummyContent.DummyItem;
 import com.example.olddrivers.myapplication.model.Movie;
+import com.example.olddrivers.myapplication.server.AsynNetUtils;
+import com.example.olddrivers.myapplication.util.ParseJSON;
 import com.example.olddrivers.myapplication.view.activity.CinemaChoosingActivity;
 import com.example.olddrivers.myapplication.view.activity.MainActivity;
 import com.example.olddrivers.myapplication.view.activity.MovieDetailActivity;
@@ -47,8 +50,6 @@ public class MovieListFragment extends Fragment implements MovieListAdapter.OnMo
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_movie_list, container, false);
 
-        list.add(new Movie("1", "zhang", 10, "ddd"));
-
         setSearch();
 
         setList();
@@ -77,14 +78,24 @@ public class MovieListFragment extends Fragment implements MovieListAdapter.OnMo
 
     private void setList() {
         //列表
-        RecyclerView listView = (RecyclerView) view.findViewById(R.id.movie_list);
-        MovieListAdapter ma = new MovieListAdapter(list, this);
-        listView.setAdapter(ma);
+        final RecyclerView listView = (RecyclerView) view.findViewById(R.id.movie_list);
+        AsynNetUtils.get(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_ONSHOW_MOVIES, new AsynNetUtils.Callback() {
+            @Override
+            public void onResponse(String response) {
+                ParseJSON parseJSON = new ParseJSON(response);
+                list = parseJSON.getOnshowMovies();
+                MovieListAdapter ma = new MovieListAdapter(list, MovieListFragment.this);
+                listView.setAdapter(ma);
+            }
+        });
+
     }
 
     @Override
-    public void onItemClick(View view) {
+    public void onItemClick(Movie movie) {
         Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
+
+        intent.putExtra("movie", movie);
         startActivity(intent);
     }
 }

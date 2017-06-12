@@ -26,7 +26,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.olddrivers.myapplication.R;
+import com.example.olddrivers.myapplication.model.Cinema;
 import com.example.olddrivers.myapplication.model.FilmItem;
+import com.example.olddrivers.myapplication.model.Movie;
+import com.example.olddrivers.myapplication.model.Showing;
+import com.example.olddrivers.myapplication.server.AsynNetUtils;
+import com.example.olddrivers.myapplication.util.ParseJSON;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -52,7 +59,10 @@ public class CinemaChoosingActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
-    FilmItem filmItem;
+    Movie movie;
+    Showing showingWithCinemaList;
+    static List<Cinema> cinemasOne;
+    static List<Cinema> cinemasTwo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +76,7 @@ public class CinemaChoosingActivity extends AppCompatActivity {
     void initialize() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -77,8 +88,21 @@ public class CinemaChoosingActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        filmItem = (FilmItem) getIntent().getSerializableExtra("FilmItem");
-        Toast.makeText(this, filmItem.getMovie_name(), Toast.LENGTH_SHORT).show();
+        movie = (Movie) getIntent().getSerializableExtra("movie");
+        if (movie != null) {
+            Log.i("dddddd",movie.getId());
+        }
+        Toast.makeText(this, movie.getName(), Toast.LENGTH_SHORT).show();
+        AsynNetUtils.get(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_SHOWS_BY_MOVIE_ID + movie.getId(), new AsynNetUtils.Callback() {
+            @Override
+            public void onResponse(String response) {
+                ParseJSON json = new ParseJSON(response);
+                List<Showing> new_showings = json.getShowingsFromMovieId();
+                cinemasOne = new_showings.get(0).getCinemaList();
+                cinemasTwo = new_showings.get(1).getCinemaList();
+                ((PlaceholderFragment) mSectionsPagerAdapter.getItem(0)).changeData(cinemasOne);
+            }
+        });
 
     }
 
@@ -92,6 +116,7 @@ public class CinemaChoosingActivity extends AppCompatActivity {
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
         List<Map<String, Object>> data;
+        final List<String> cinemaNames = new ArrayList<>();
         SimpleAdapter simpleAdapter;
         int month;
         int date;
@@ -118,15 +143,13 @@ public class CinemaChoosingActivity extends AppCompatActivity {
             ListView listView = (ListView) rootView.findViewById(R.id.cinema_listview);
             data = new ArrayList<>();
 
-            final List<String> cinemaNames = new ArrayList<>();
-
-            for (int i = 0; i < 20; i++) {
+            /*for (int i = 0; i < 20; i++) {
                 Map<String, Object> temp = new LinkedHashMap<>();
                 cinemaNames.add("金逸（大学城）" + String.valueOf(i));
                 temp.put("name", cinemaNames.get(i));
                 temp.put("price", i);
                 data.add(temp);
-            }
+            }*/
             simpleAdapter = new SimpleAdapter(getActivity(), data, R.layout.cinema_item,
                     new String[] {"name", "price"}, new int[] {R.id.cinema_name, R.id.cinema_price});
             listView.setAdapter(simpleAdapter);
@@ -148,6 +171,15 @@ public class CinemaChoosingActivity extends AppCompatActivity {
             });
             return rootView;
         }
+
+        public void changeData(List<Cinema> cinemas) {
+            for (int i = 0; i < cinemas.size(); i++) {
+                cinemaNames.add(cinemas.get(i).getName());
+                simpleAdapter.notifyDataSetChanged();
+            }
+
+        }
+
     }
 
     /**
@@ -169,8 +201,8 @@ public class CinemaChoosingActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 5 total pages.
-            return 5;
+            // Show 2 total pages.
+            return 2;
         }
 
         @Override
@@ -180,7 +212,7 @@ public class CinemaChoosingActivity extends AppCompatActivity {
             int month = calendar.get(Calendar.MONTH) + 1;
             int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-            switch (position) {
+            /*switch (position) {
                 case 0:
                     return String.valueOf(month) + "月" + String.valueOf(day + 0) + "日";
                 case 1:
@@ -191,7 +223,15 @@ public class CinemaChoosingActivity extends AppCompatActivity {
                     return String.valueOf(month) + "月" + String.valueOf(day + 3) + "日";
                 case 4:
                     return String.valueOf(month) + "月" + String.valueOf(day + 4) + "日";
+            }*/
+
+            switch (position) {
+                case 0:
+                    return "今日";
+                case 1:
+                    return "明日";
             }
+
             return null;
         }
     }

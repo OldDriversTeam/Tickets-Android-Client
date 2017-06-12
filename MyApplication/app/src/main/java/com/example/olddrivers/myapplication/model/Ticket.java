@@ -11,7 +11,7 @@ public class Ticket {
     private String showingId;
     private String userId;
     private int count;
-    private List<Seat> seats;
+    private Seat seat;
 
     private String cinema;
     private String movie;
@@ -19,11 +19,10 @@ public class Ticket {
     private String time;
     private String price;
 
-    public Ticket(String showingId, String userId, int count, List<Seat> seats) {
+    public Ticket(String showingId, String userId, Seat seat) {
         this.showingId = showingId;
         this.userId = userId;
-        this.count = count;
-        this.seats = seats;
+        this.seat = seat;
     }
 
     public String getShowingId() {
@@ -50,12 +49,12 @@ public class Ticket {
         this.count = count;
     }
 
-    public List<Seat> getSeats() {
-        return seats;
+    public Seat getSeat() {
+        return seat;
     }
 
-    public void setSeats(List<Seat> seats) {
-        this.seats = seats;
+    public void setSeat(Seat seat) {
+        this.seat = seat;
     }
 
     public String getCinema() {
@@ -97,7 +96,5 @@ public class Ticket {
     public void setPrice(String price) {
         this.price = price;
     }
-
-
 
 }

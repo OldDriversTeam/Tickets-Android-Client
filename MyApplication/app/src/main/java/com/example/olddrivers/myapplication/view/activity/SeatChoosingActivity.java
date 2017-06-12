@@ -1,8 +1,11 @@
 package com.example.olddrivers.myapplication.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,9 +20,7 @@ import java.util.List;
 public class SeatChoosingActivity extends AppCompatActivity {
 
     SeatTable seatTableView;
-
-    LinearLayout selected_layout;
-    TextView changing;
+    Button btn;
     List<Seat> selected_seats;
     GridView gridView;
     SeatGridAdapter gridAdapter;
@@ -33,6 +34,7 @@ public class SeatChoosingActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         initialze();
+        setListener();
 
     }
 
@@ -43,18 +45,19 @@ public class SeatChoosingActivity extends AppCompatActivity {
         //selected_layout = (LinearLayout) findViewById(R.id.selected_layout);
 
         selected_seats = new ArrayList<>();
+        btn = (Button) findViewById(R.id.btn_toConfirm);
         /*selected_seats.add(new Seat(0,0));
         selected_seats.add(new Seat(1,1));
         selected_seats.add(new Seat(2,2));
         selected_seats.add(new Seat(3,3));*/
 
         gridView = (GridView) findViewById(R.id.seat_gridview);
-        gridAdapter = new SeatGridAdapter(this, selected_seats);
+        gridAdapter = new SeatGridAdapter(this, selected_seats, 0);
         gridView.setAdapter(gridAdapter);
 
         seatTableView = (SeatTable) findViewById(R.id.seatView);
         seatTableView.setScreenName("荧幕");//设置屏幕名称
-        seatTableView.setMaxSelected(20);//设置最多选中
+        seatTableView.setMaxSelected(9);//设置最多选中
 
         seatTableView.setSeatChecker(new SeatTable.SeatChecker() {
 
@@ -130,6 +133,22 @@ public class SeatChoosingActivity extends AppCompatActivity {
         });
         seatTableView.setData(10,12);
 
+    }
+
+    void setListener() {
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SeatChoosingActivity.this, newTicketConfirm.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("count", selected_seats.size());
+                for (int i = 0; i < selected_seats.size(); i++) {
+                    bundle.putSerializable("seat" + String.valueOf(i), selected_seats.get(i));
+                }
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
 
 }
