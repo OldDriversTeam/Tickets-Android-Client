@@ -122,7 +122,7 @@ public class ParseJSON {
         List<Showing> showings = new ArrayList<>();
         try {
             int size = toParse.getInt("size");
-            JSONArray jsonArray = toParse.getJSONArray("showinglist");
+            JSONArray jsonArray = toParse.getJSONArray("showingList");
             for (int i = 0; i < size; i++) {
                 JSONObject showingListObject = jsonArray.getJSONObject(i);
                 String date = showingListObject.getString("date");
@@ -131,8 +131,8 @@ public class ParseJSON {
                 List<Cinema> cinemas = new ArrayList<>();
                 for (int j = 0; j < cinemaList.length(); j++) {
                     JSONObject cinemaObject = cinemaList.getJSONObject(j);
-                    String id = cinemaObject.getString("id");
                     String name = cinemaObject.getString("name");
+                    String id = cinemaObject.getString("id");
                     Cinema cinema = new Cinema(id, name, null, null, null);
                     showing.setCinemaId(id);
                     cinemas.add(cinema);

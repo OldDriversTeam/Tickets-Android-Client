@@ -63,7 +63,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         btn_buy = (Button) findViewById(R.id.btn_toBuying);
 
         //movie = (Movie) getIntent().getExtras().getSerializable("movie");
-        movie = new Movie("m3", null, 0, null);
+        movie = new Movie("m1", null, 0, null);
         AsynNetUtils.get(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_MOVIE_BY_ID + movie.getId(), new AsynNetUtils.Callback() {
             @Override
             public void onResponse(String response) {
