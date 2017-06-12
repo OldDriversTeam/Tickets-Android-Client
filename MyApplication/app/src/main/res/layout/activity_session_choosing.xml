@@ -15,9 +15,39 @@
         style="@style/SessionSelectTitle"
         android:text="神奇" />
 
-    <ListView
-        android:id="@+id/ss_listview"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider_thin"
+        android:showDividers="middle">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                style="@style/SessionTitle"
+                android:text="放映时间"/>
+
+            <TextView
+                style="@style/SessionTitle"
+                android:text="放映厅"/>
+
+            <TextView
+                style="@style/SessionTitle"
+                android:text="票价（元）"/>
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/ss_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
 </LinearLayout>

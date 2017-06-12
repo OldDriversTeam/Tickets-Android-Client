@@ -1,5 +1,6 @@
 package com.example.olddrivers.myapplication.view.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -59,10 +60,8 @@ public class CinemaChoosingActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
-    Movie movie;
+    static Movie movie;
     Showing showingWithCinemaList;
-    static List<Cinema> cinemasOne;
-    static List<Cinema> cinemasTwo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,16 +92,6 @@ public class CinemaChoosingActivity extends AppCompatActivity {
             Log.i("dddddd",movie.getId());
         }
         Toast.makeText(this, movie.getName(), Toast.LENGTH_SHORT).show();
-        AsynNetUtils.get(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_SHOWS_BY_MOVIE_ID + movie.getId(), new AsynNetUtils.Callback() {
-            @Override
-            public void onResponse(String response) {
-                ParseJSON json = new ParseJSON(response);
-                List<Showing> new_showings = json.getShowingsFromMovieId();
-                cinemasOne = new_showings.get(0).getCinemaList();
-                cinemasTwo = new_showings.get(1).getCinemaList();
-                ((PlaceholderFragment) mSectionsPagerAdapter.getItem(0)).changeData(cinemasOne);
-            }
-        });
 
     }
 
@@ -114,13 +103,17 @@ public class CinemaChoosingActivity extends AppCompatActivity {
          * The fragment argument representing the section number for this
          * fragment.
          */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-        List<Map<String, Object>> data;
-        final List<String> cinemaNames = new ArrayList<>();
-        SimpleAdapter simpleAdapter;
-        int month;
-        int date;
 
+        View rootView;
+        ListView listView;
+
+        private static final String ARG_SECTION_NUMBER = "section_number";
+        List<Map<String, Object>> data = new ArrayList<>();
+        List<Cinema> cinemas;
+        String date;
+        List<String> cinemaNames = new ArrayList<>();
+        List<String> cinemaIds = new ArrayList<>();
+        SimpleAdapter simpleAdapter;
         public PlaceholderFragment() {
         }
 
@@ -139,9 +132,8 @@ public class CinemaChoosingActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_cinema_choosing, container, false);
-            ListView listView = (ListView) rootView.findViewById(R.id.cinema_listview);
-            data = new ArrayList<>();
+            rootView = inflater.inflate(R.layout.fragment_cinema_choosing, container, false);
+            listView = (ListView) rootView.findViewById(R.id.cinema_listview);
 
             /*for (int i = 0; i < 20; i++) {
                 Map<String, Object> temp = new LinkedHashMap<>();
@@ -150,34 +142,47 @@ public class CinemaChoosingActivity extends AppCompatActivity {
                 temp.put("price", i);
                 data.add(temp);
             }*/
-            simpleAdapter = new SimpleAdapter(getActivity(), data, R.layout.cinema_item,
-                    new String[] {"name", "price"}, new int[] {R.id.cinema_name, R.id.cinema_price});
-            listView.setAdapter(simpleAdapter);
+
+            AsynNetUtils.get(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_SHOWS_BY_MOVIE_ID + movie.getId(), new AsynNetUtils.Callback() {
+                @Override
+                public void onResponse(String response) {
+                    ParseJSON json = new ParseJSON(response);
+                    Log.i("response", response);
+                    List<Showing> new_showings = json.getShowingsFromMovieId();
+                    int index = getArguments().getInt(ARG_SECTION_NUMBER);
+                    date = new_showings.get(index).getDate();
+                    cinemas = new_showings.get(index).getCinemaList();
+
+                    for (int i = 0; i < cinemas.size(); i++) {
+                        Map<String, Object> temp = new LinkedHashMap<>();
+                        cinemaNames.add(cinemas.get(i).getName());
+                        cinemaIds.add(cinemas.get(i).getId());
+                        temp.put("name", cinemaNames.get(i));
+                        temp.put("price", cinemaIds.get(i));
+                        data.add(temp);
+                    }
+
+                    Log.i("create", getActivity().toString());
+                    simpleAdapter = new SimpleAdapter(getActivity(), data, R.layout.cinema_item,
+                            new String[] {"name", "price"}, new int[] {R.id.cinema_name, R.id.cinema_price});
+                    listView.setAdapter(simpleAdapter);
+
+                }
+            });
+
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent = new Intent(getActivity(), SessionChoosingActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("cinema_name", cinemaNames.get(position));
-
-                    int index = getArguments().getInt(ARG_SECTION_NUMBER);
-                    Calendar calendar = Calendar.getInstance();
-                    bundle.putInt("month", calendar.get(Calendar.MONTH) + 1);
-                    bundle.putInt("date", calendar.get(Calendar.DAY_OF_MONTH) + index);
-
+                    bundle.putSerializable("cinema", cinemas.get(position));
+                    bundle.putSerializable("movie", movie);
+                    bundle.putString("date", date);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
             });
             return rootView;
-        }
-
-        public void changeData(List<Cinema> cinemas) {
-            for (int i = 0; i < cinemas.size(); i++) {
-                cinemaNames.add(cinemas.get(i).getName());
-                simpleAdapter.notifyDataSetChanged();
-            }
-
         }
 
     }

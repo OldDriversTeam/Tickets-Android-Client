@@ -1,10 +1,12 @@
 package com.example.olddrivers.myapplication.model;
 
+import java.io.Serializable;
+
 /**
  * Created by FrankLin on 2017/6/9.
  */
 
-public class Cinema {
+public class Cinema implements Serializable {
 
     private String id;
     private String name;

@@ -122,7 +122,7 @@ public class ParseJSON {
         List<Showing> showings = new ArrayList<>();
         try {
             int size = toParse.getInt("size");
-            JSONArray jsonArray = toParse.getJSONArray("showinglist");
+            JSONArray jsonArray = toParse.getJSONArray("showingList");
             for (int i = 0; i < size; i++) {
                 JSONObject showingListObject = jsonArray.getJSONObject(i);
                 String date = showingListObject.getString("date");
@@ -131,8 +131,8 @@ public class ParseJSON {
                 List<Cinema> cinemas = new ArrayList<>();
                 for (int j = 0; j < cinemaList.length(); j++) {
                     JSONObject cinemaObject = cinemaList.getJSONObject(j);
-                    String id = cinemaObject.getString("id");
                     String name = cinemaObject.getString("name");
+                    String id = cinemaObject.getString("id");
                     Cinema cinema = new Cinema(id, name, null, null, null);
                     showing.setCinemaId(id);
                     cinemas.add(cinema);
@@ -151,8 +151,8 @@ public class ParseJSON {
         try {
             String id = toParse.getString("id");
             String name = toParse.getString("name");
-            String col = toParse.getString("time");
-            String row = toParse.getString("price");
+            String col = toParse.getString("col");
+            String row = toParse.getString("row");
             String cinemaId = toParse.getString("cinemaId");
             room = new Room(id, name, col, row, cinemaId);
         } catch (Exception e) {
@@ -161,13 +161,21 @@ public class ParseJSON {
         return room;
     }
 
-    public List<String> getShowingIdList() {
-        List<String> showingList = new ArrayList<>();
+    public List<Showing> getShowingListFromCDM() {
+        List<Showing> showingList = new ArrayList<>();
         try {
             int size = toParse.getInt("size");
-            JSONArray jsonArray = toParse.getJSONArray("showingIdList");
+            JSONArray jsonArray = toParse.getJSONArray("showingList");
             for (int i = 0; i < size; i++) {
-                showingList.add(jsonArray.getString(i));
+                JSONObject showingObject = jsonArray.getJSONObject(i);
+                String id = showingObject.getString("showingId");
+                String time = showingObject.getString("time");
+                String price = showingObject.getString("price");
+                String roomId = showingObject.getString("roomId");
+                String roomName = showingObject.getString("roomName");
+                Showing showing = new Showing(id, null, time, price, null, null, roomId);
+                showing.setRoomName(roomName);
+                showingList.add(showing);
             }
         } catch (Exception e) {
             e.printStackTrace();
