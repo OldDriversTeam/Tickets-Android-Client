@@ -1,12 +1,13 @@
 package com.example.olddrivers.myapplication.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by FrankLin on 2017/6/9.
  */
 
-public class Showing {
+public class Showing implements Serializable {
 
     private String id;
     private String date;

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -14,6 +15,9 @@ import android.widget.Toast;
 import com.example.olddrivers.myapplication.R;
 import com.example.olddrivers.myapplication.model.Cinema;
 import com.example.olddrivers.myapplication.model.Movie;
+import com.example.olddrivers.myapplication.model.Showing;
+import com.example.olddrivers.myapplication.server.AsynNetUtils;
+import com.example.olddrivers.myapplication.util.ParseJSON;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -29,9 +33,11 @@ public class SessionChoosingActivity extends AppCompatActivity {
     Cinema cinema;
     Movie movie;
     String date;
+    List<Showing> showingList;
     List<Map<String, Object>> session_data;
-    List<String> detailStart;
-    List<String> detailEnd;
+    List<String> room;
+    List<String> time;
+    List<String> price;
     SimpleAdapter simpleAdapter;
 
 
@@ -49,6 +55,10 @@ public class SessionChoosingActivity extends AppCompatActivity {
 
     void initialize() {
         Bundle bundle_in = getIntent().getExtras();
+        session_data = new ArrayList<>();
+        room = new ArrayList<>();
+        time = new ArrayList<>();
+        price = new ArrayList<>();
         cinema = (Cinema) bundle_in.getSerializable("cinema");
         movie = (Movie) bundle_in.getSerializable("movie");
         date = bundle_in.getString("date");
@@ -59,28 +69,36 @@ public class SessionChoosingActivity extends AppCompatActivity {
 
         cinema_name.setText(cinema.getName());
         movie_name.setText(movie.getName());
-
-        session_data = new ArrayList<>();
-        detailStart = new ArrayList<>();
-        detailEnd = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            detailStart.add(String.valueOf(i));
-            detailEnd.add(String.valueOf(i+1));
-            Map<String, Object> temp = new LinkedHashMap<>();
-            temp.put("start_time", detailStart.get(i));
-            temp.put("end_time", detailEnd.get(i));
-            session_data.add(temp);
-        }
-        simpleAdapter = new SimpleAdapter(this, session_data, R.layout.sesion_item,
-                new String[] {"start_time", "end_time"}, new int[] {R.id.ss_start, R.id.ss_end});
-        listview.setAdapter(simpleAdapter);
+        String url = AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_SHOWS_BY_DATA_CINEMA
+                + cinema.getId() + "/date/" + date + "/movie/" + movie.getId();
+        AsynNetUtils.get(url, new AsynNetUtils.Callback() {
+            @Override
+            public void onResponse(String response) {
+                ParseJSON parseJSON = new ParseJSON(response);
+                showingList = parseJSON.getShowingListFromCDM();
+                for (int i = 0; i < showingList.size(); i++) {
+                    room.add(showingList.get(i).getRoomName());
+                    time.add(showingList.get(i).getTime());
+                    price.add(showingList.get(i).getPrice());
+                    Map<String, Object> temp = new LinkedHashMap<>();
+                    temp.put("room", room.get(i));
+                    temp.put("time", time.get(i));
+                    temp.put("price", price.get(i));
+                    session_data.add(temp);
+                }
+                simpleAdapter = new SimpleAdapter(SessionChoosingActivity.this, session_data, R.layout.sesion_item,
+                        new String[] {"room", "time", "price"}, new int[] {R.id.ss_room, R.id.ss_time, R.id.ss_price});
+                listview.setAdapter(simpleAdapter);
+            }
+        });
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(SessionChoosingActivity.this, SeatChoosingActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("start_time", detailStart.get(position));
-                bundle.putString("end_time", detailEnd.get(position));
+                bundle.putSerializable("movie", movie);
+                bundle.putSerializable("cinema", cinema);
+                bundle.putSerializable("showing", showingList.get(position));
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

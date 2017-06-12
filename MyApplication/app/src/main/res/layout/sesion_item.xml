@@ -4,19 +4,18 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/ss_start"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_weight="1"
+        android:id="@+id/ss_room"
+        style="@style/SessionItem"
         android:text="test"/>
 
     <TextView
-        android:id="@+id/ss_end"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_weight="1"
+        android:id="@+id/ss_time"
+        style="@style/SessionItem"
+        android:text="test"/>
+
+    <TextView
+        android:id="@+id/ss_price"
+        style="@style/SessionItem"
         android:text="test"/>
 
 </LinearLayout>
