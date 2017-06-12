@@ -34,4 +34,11 @@ public class InfoChecker {
 
         return INFO_FORMAT_ERR;
     }
+
+    public static int UserNameCheck(String userName) {
+        if (TextUtils.isEmpty(userName)) return INFO_EMPTY;
+        if (userName.length() < 3) return INFO_TOO_SHORT;
+
+        return SUCCESS;
+    }
 }

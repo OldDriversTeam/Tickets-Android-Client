@@ -23,8 +23,10 @@
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_empty_phone">This phone number can not be empty</string>
     <string name="error_empty_password">This password can not be empty</string>
+    <string name="error_empty_user_name">This user name can not be empty</string>
     <string name="error_invalid_phone">This phone number is invalid</string>
     <string name="error_invalid_password">This password is invalid</string>
+    <string name="error_invalid_user_name">This user name is invalid</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email

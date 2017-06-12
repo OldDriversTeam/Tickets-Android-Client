@@ -255,7 +255,7 @@ public class ParseJSON {
         return user;
     }
 
-    public List<Object> getIdAfterRegister() {
+    public List<Object> getUserAfterRegister() {
         List<Object> res = new ArrayList<>();
         try {
             int state = toParse.getInt("state");
