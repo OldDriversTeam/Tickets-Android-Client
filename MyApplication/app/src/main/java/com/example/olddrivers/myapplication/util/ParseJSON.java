@@ -151,8 +151,8 @@ public class ParseJSON {
         try {
             String id = toParse.getString("id");
             String name = toParse.getString("name");
-            String col = toParse.getString("time");
-            String row = toParse.getString("price");
+            String col = toParse.getString("col");
+            String row = toParse.getString("row");
             String cinemaId = toParse.getString("cinemaId");
             room = new Room(id, name, col, row, cinemaId);
         } catch (Exception e) {

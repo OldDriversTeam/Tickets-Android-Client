@@ -48,6 +48,24 @@
         <item name="android:gravity">center</item>
         <item name="android:layout_weight">1</item>>
         <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="SessionTitle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_weight">1</item>>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="SelectSeatDate">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/lightslategray</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:visibility">visible</item>
     </style>
 
     <style name="SelectedSeat">

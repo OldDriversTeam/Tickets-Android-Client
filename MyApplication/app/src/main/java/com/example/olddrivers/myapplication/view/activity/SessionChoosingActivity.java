@@ -77,17 +77,18 @@ public class SessionChoosingActivity extends AppCompatActivity {
                 ParseJSON parseJSON = new ParseJSON(response);
                 showingList = parseJSON.getShowingListFromCDM();
                 for (int i = 0; i < showingList.size(); i++) {
-                    room.add(showingList.get(i).getRoomName());
+                    showingList.get(i).setDate(date);
                     time.add(showingList.get(i).getTime());
+                    room.add(showingList.get(i).getRoomName());
                     price.add(showingList.get(i).getPrice());
                     Map<String, Object> temp = new LinkedHashMap<>();
-                    temp.put("room", room.get(i));
                     temp.put("time", time.get(i));
+                    temp.put("room", room.get(i));
                     temp.put("price", price.get(i));
                     session_data.add(temp);
                 }
                 simpleAdapter = new SimpleAdapter(SessionChoosingActivity.this, session_data, R.layout.sesion_item,
-                        new String[] {"room", "time", "price"}, new int[] {R.id.ss_room, R.id.ss_time, R.id.ss_price});
+                        new String[] {"time", "room", "price"}, new int[] {R.id.ss_time, R.id.ss_room, R.id.ss_price});
                 listview.setAdapter(simpleAdapter);
             }
         });
