@@ -161,13 +161,21 @@ public class ParseJSON {
         return room;
     }
 
-    public List<String> getShowingIdList() {
-        List<String> showingList = new ArrayList<>();
+    public List<Showing> getShowingListFromCDM() {
+        List<Showing> showingList = new ArrayList<>();
         try {
             int size = toParse.getInt("size");
-            JSONArray jsonArray = toParse.getJSONArray("showingIdList");
+            JSONArray jsonArray = toParse.getJSONArray("showingList");
             for (int i = 0; i < size; i++) {
-                showingList.add(jsonArray.getString(i));
+                JSONObject showingObject = jsonArray.getJSONObject(i);
+                String id = showingObject.getString("showingId");
+                String time = showingObject.getString("time");
+                String price = showingObject.getString("price");
+                String roomId = showingObject.getString("roomId");
+                String roomName = showingObject.getString("roomName");
+                Showing showing = new Showing(id, null, time, price, null, null, roomId);
+                showing.setRoomName(roomName);
+                showingList.add(showing);
             }
         } catch (Exception e) {
             e.printStackTrace();

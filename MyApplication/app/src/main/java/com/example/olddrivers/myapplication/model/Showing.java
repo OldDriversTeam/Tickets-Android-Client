@@ -16,6 +16,7 @@ public class Showing {
     private String cinemaId;
     private List<Cinema> cinemaList;
     private String roomId;
+    private String roomName;
 
     public Showing(String id, String date, String time, String price, String movieId, String cinemaId, String roomId) {
         this.id = id;
@@ -59,6 +60,10 @@ public class Showing {
         this.cinemaList = cinemaList;
     }
 
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
     public String getId() {
         return id;
     }
@@ -89,6 +94,10 @@ public class Showing {
 
     public List<Cinema> getCinemaList() {
         return cinemaList;
+    }
+
+    public String getRoomName() {
+        return roomName;
     }
 
 }
