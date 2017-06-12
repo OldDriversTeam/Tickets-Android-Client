@@ -82,10 +82,8 @@ public class MovieListFragment extends Fragment implements MovieListAdapter.OnMo
         AsynNetUtils.get(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_ONSHOW_MOVIES, new AsynNetUtils.Callback() {
             @Override
             public void onResponse(String response) {
-                Log.i("image", response);
                 ParseJSON parseJSON = new ParseJSON(response);
                 list = parseJSON.getOnshowMovies();
-                Log.i("ddddddddddddd", list.get(0).getId());
                 MovieListAdapter ma = new MovieListAdapter(list, MovieListFragment.this);
                 listView.setAdapter(ma);
             }

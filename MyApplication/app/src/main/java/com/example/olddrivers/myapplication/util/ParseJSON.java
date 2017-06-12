@@ -123,7 +123,6 @@ public class ParseJSON {
         try {
             int size = toParse.getInt("size");
             JSONArray jsonArray = toParse.getJSONArray("showinglist");
-            Log.i("size", String.valueOf(size));
             for (int i = 0; i < size; i++) {
                 JSONObject showingListObject = jsonArray.getJSONObject(i);
                 String date = showingListObject.getString("date");
