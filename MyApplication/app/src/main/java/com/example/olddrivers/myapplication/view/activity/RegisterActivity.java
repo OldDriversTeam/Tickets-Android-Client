@@ -162,6 +162,7 @@ public class RegisterActivity extends AppCompatActivity {
             AsynNetUtils.post(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.POST_REGISTER, jsonObject.toString(), new AsynNetUtils.Callback() {
                 @Override
                 public void onResponse(String response) {
+                    Log.i("response", response);
                     ParseJSON parseJSON = new ParseJSON(response);
                     List<Object> list = parseJSON.getUserAfterRegister();
                     if ((int)list.get(0) == AsynNetUtils.SUCCESSD) {

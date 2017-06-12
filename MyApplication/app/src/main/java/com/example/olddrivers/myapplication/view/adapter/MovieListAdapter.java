@@ -36,7 +36,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.item = list.get(position);
         AsynNetUtils.getBitmap(holder.item.getPoster(), new AsynNetUtils.BitmapCallback() {
             @Override
@@ -52,7 +52,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
             @Override
             public void onClick(View v) {
             if (null != mListener) {
-                mListener.onItemClick(holder.mView);
+                mListener.onItemClick(holder.item);
             }
             }
         });
@@ -90,6 +90,6 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
     }
 
     public interface OnMovieListItemClickListener {
-        void onItemClick(View view);
+        void onItemClick(Movie movie);
     }
 }

@@ -92,9 +92,10 @@ public class MovieListFragment extends Fragment implements MovieListAdapter.OnMo
     }
 
     @Override
-    public void onItemClick(View view) {
+    public void onItemClick(Movie movie) {
         Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
-        intent.putExtra()
+
+        intent.putExtra("movie", movie);
         startActivity(intent);
     }
 }
