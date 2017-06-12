@@ -16,9 +16,15 @@ import android.widget.TextView;
 
 import com.example.olddrivers.myapplication.R;
 import com.example.olddrivers.myapplication.model.FilmItem;
+import com.example.olddrivers.myapplication.model.Movie;
+import com.example.olddrivers.myapplication.server.AsynNetUtils;
+import com.example.olddrivers.myapplication.util.ParseJSON;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
+
+    TextView film_name;
+    TextView film_date;
     LinearLayout description_layout;
     ScrollView description_scrollView;
     TextView description_text;
@@ -30,7 +36,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     Button btn_buy;
 
     Bundle bundle_in;
-    FilmItem filmItem;
+    Movie movie;
     int default_description_lines;
 
     @Override
@@ -43,6 +49,9 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     void initialize() {
+
+        film_name = (TextView) findViewById(R.id.filmDetail_name);
+        film_date = (TextView) findViewById(R.id.filmDetail_date);
         description_layout = (LinearLayout) findViewById(R.id.description_layout);
         description_scrollView = (ScrollView) findViewById(R.id.description_scrollview);
         description_text = (TextView) findViewById(R.id.description_view);
@@ -53,10 +62,29 @@ public class MovieDetailActivity extends AppCompatActivity {
         detail_expand = (ImageView) findViewById(R.id.detail_expand_view);
         btn_buy = (Button) findViewById(R.id.btn_toBuying);
 
+        //movie = (Movie) getIntent().getExtras().getSerializable("movie");
+        movie = new Movie("m3", null, 0, null);
+        AsynNetUtils.get(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_MOVIE_BY_ID + movie.getId(), new AsynNetUtils.Callback() {
+            @Override
+            public void onResponse(String response) {
+                ParseJSON json = new ParseJSON(response);
+                Movie new_movie = json.getMovieFromId();
+                movie.setId(new_movie.getId());
+                movie.setName(new_movie.getName());
+                movie.setAvgScore(new_movie.getAvgScore());
+                movie.setStoryLine(new_movie.getStoryLine());
+                movie.setReleaseDate(new_movie.getReleaseDate());
+                movie.setDetai(new_movie.getDetai());
+                movie.setMovieType(new_movie.getMovieType());
+                film_name.setText(movie.getName());
+                film_date.setText(movie.getReleaseDate());
+                description_text.setText(movie.getStoryLine());
+                detail_text.setText(movie.getDetai());
+            }
+        });
+
         /*bundle_in = getIntent().getExtras();
         movie = Movies.get(bundle_in.getInt("position"));*/
-
-        filmItem = new FilmItem("神奇女侠", null, null);
 
         default_description_lines = 5;
         description_text.setHeight(description_text.getLineHeight() * default_description_lines);
@@ -126,7 +154,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MovieDetailActivity.this, CinemaChoosingActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("FilmItem", filmItem);
+                bundle.putSerializable("movie", movie);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -170,17 +198,6 @@ public class MovieDetailActivity extends AppCompatActivity {
                 };
                 animation.setDuration(durationMillis);
                 detail_text.startAnimation(animation);
-            }
-        });
-
-        btn_buy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MovieDetailActivity.this, CinemaChoosingActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("FilmItem", filmItem);
-                intent.putExtras(bundle);
-                startActivity(intent);
             }
         });
 

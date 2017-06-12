@@ -1,5 +1,7 @@
 package com.example.olddrivers.myapplication.model;
 
+import java.util.List;
+
 /**
  * Created by FrankLin on 2017/6/9.
  */
@@ -12,6 +14,7 @@ public class Showing {
     private String price;
     private String movieId;
     private String cinemaId;
+    private List<Cinema> cinemaList;
     private String roomId;
 
     public Showing(String id, String date, String time, String price, String movieId, String cinemaId, String roomId) {
@@ -52,6 +55,10 @@ public class Showing {
         this.roomId = roomId;
     }
 
+    public void setCinemaList(List<Cinema> cinemaList) {
+        this.cinemaList = cinemaList;
+    }
+
     public String getId() {
         return id;
     }
@@ -78,6 +85,10 @@ public class Showing {
 
     public String getRoomId() {
         return roomId;
+    }
+
+    public List<Cinema> getCinemaList() {
+        return cinemaList;
     }
 
 }
