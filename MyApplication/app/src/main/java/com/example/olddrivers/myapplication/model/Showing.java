@@ -13,20 +13,19 @@ public class Showing implements Serializable {
     private String date;
     private String time;
     private String price;
-    private String movieId;
-    private String cinemaId;
+    private Movie movie;
+    private Cinema cinema;
+    private Room room;
     private List<Cinema> cinemaList;
-    private String roomId;
-    private String roomName;
 
-    public Showing(String id, String date, String time, String price, String movieId, String cinemaId, String roomId) {
+    public Showing(String id, String date, String time, String price, Movie movie, Cinema cinema, Room room) {
         this.id = id;
         this.date = date;
         this.time = time;
         this.price = price;
-        this.movieId = movieId;
-        this.cinemaId = cinemaId;
-        this.roomId = roomId;
+        this.movie = movie;
+        this.cinema = cinema;
+        this.room = room;
     }
 
     public void setId(String id) {
@@ -45,25 +44,22 @@ public class Showing implements Serializable {
         this.price = price;
     }
 
-    public void setMovieId(String movieId) {
-        this.movieId = movieId;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
-    public void setCinemaId(String cinemaId) {
-        this.cinemaId = cinemaId;
+    public void setCinema(Cinema cinema) {
+        this.cinema = cinema;
     }
 
-    public void setRoomId(String roomId) {
-        this.roomId = roomId;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public void setCinemaList(List<Cinema> cinemaList) {
         this.cinemaList = cinemaList;
     }
 
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
-    }
 
     public String getId() {
         return id;
@@ -81,24 +77,19 @@ public class Showing implements Serializable {
         return price;
     }
 
-    public String getMovieId() {
-        return movieId;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public String getCinemaId() {
-        return cinemaId;
+    public Cinema getCinema() {
+        return cinema;
     }
 
-    public String getRoomId() {
-        return roomId;
+    public Room getRoom() {
+        return room;
     }
 
     public List<Cinema> getCinemaList() {
         return cinemaList;
     }
-
-    public String getRoomName() {
-        return roomName;
-    }
-
 }

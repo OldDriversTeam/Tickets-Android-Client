@@ -111,7 +111,10 @@ public class ParseJSON {
             String movieId = toParse.getString("movieId");
             String cinemaId = toParse.getString("cinemaId");
             String roomId = toParse.getString("roomId");
-            showing = new Showing(id, date, time, price, movieId, cinemaId, roomId);
+            Movie movie = new Movie(movieId, null, 0, null);
+            Cinema cinema = new Cinema(movieId, null, null, null, null);
+            Room room = new Room(roomId, null, null, null, null);
+            showing = new Showing(id, date, time, price, movie, cinema, room);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -134,7 +137,7 @@ public class ParseJSON {
                     String name = cinemaObject.getString("name");
                     String id = cinemaObject.getString("id");
                     Cinema cinema = new Cinema(id, name, null, null, null);
-                    showing.setCinemaId(id);
+                    showing.setCinema(cinema);
                     cinemas.add(cinema);
                 }
                 showing.setCinemaList(cinemas);
@@ -173,8 +176,8 @@ public class ParseJSON {
                 String price = showingObject.getString("price");
                 String roomId = showingObject.getString("roomId");
                 String roomName = showingObject.getString("roomName");
-                Showing showing = new Showing(id, null, time, price, null, null, roomId);
-                showing.setRoomName(roomName);
+                Room room = new Room(roomId, roomName, null, null, null);
+                Showing showing = new Showing(id, null, time, price, null, null, room);
                 showingList.add(showing);
             }
         } catch (Exception e) {
@@ -213,18 +216,36 @@ public class ParseJSON {
         return seats;
     }
 
-    public List<String> getTicketIdsFromUserId() {
-        List<String> ticketIds = new ArrayList<>();
+    public List<Ticket> getTicketsFromUserId() {
+        List<Ticket> tickets = new ArrayList<>();
         try {
             int size = toParse.getInt("size");
-            JSONArray jsonArray = toParse.getJSONArray("ticketIdsList");
+            JSONArray jsonArray = toParse.getJSONArray("ticketList");
             for (int i = 0; i < size; i++) {
-                ticketIds.add(jsonArray.getString(i));
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String showingId = jsonObject.getString("showingId");
+                String movieName = jsonObject.getString("movieName");
+                String movieType = jsonObject.getString("movieType");
+                String moviePoster = jsonObject.getString("moviePoster");
+                String cinemaName = jsonObject.getString("cinemaName");
+                String roomName = jsonObject.getString("roomName");
+                String date = jsonObject.getString("date");
+                String time = jsonObject.getString("time");
+                int seatColNum = jsonObject.getInt("seatColNum");
+                int seatRowNum = jsonObject.getInt("seatRowNum");
+                Movie movie = new Movie(null, movieName, 0, moviePoster);
+                movie.setMovieType(movieType);
+                Cinema cinema = new Cinema(null, cinemaName, null, null, null);
+                Room room = new Room(null, roomName, String.valueOf(seatColNum), String.valueOf(seatRowNum), null);
+                Showing showing = new Showing(showingId, date, time, null, movie, cinema, room);
+                Seat seat = new Seat(seatRowNum, seatColNum);
+                Ticket ticket = new Ticket(showing, null, seat);
+                tickets.add(ticket);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return ticketIds;
+        return tickets;
     }
 
     public Ticket getTicketFromTicketId() {
@@ -233,7 +254,8 @@ public class ParseJSON {
             String showingId = toParse.getString("showingId");
             JSONArray jsonArray = toParse.getJSONArray("seat");
             Seat seat = new Seat(jsonArray.getInt(0), jsonArray.getInt(1));
-            ticket = new Ticket(showingId, null, seat);
+            Showing showing = new Showing(showingId, null, null, null, null, null, null);
+            ticket = new Ticket(showing, null, seat);
         } catch (Exception e) {
             e.printStackTrace();
         }

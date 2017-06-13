@@ -8,29 +8,23 @@ import java.util.List;
 
 public class Ticket {
 
-    private String showingId;
+    private Showing showing;
     private String userId;
     private int count;
     private Seat seat;
 
-    private String cinema;
-    private String movie;
-    private String session;
-    private String time;
-    private String price;
-
-    public Ticket(String showingId, String userId, Seat seat) {
-        this.showingId = showingId;
+    public Ticket(Showing showing, String userId, Seat seat) {
+        this.showing = showing;
         this.userId = userId;
         this.seat = seat;
     }
 
-    public String getShowingId() {
-        return showingId;
+    public Showing getShowing() {
+        return showing;
     }
 
-    public void setShowingId(String showingId) {
-        this.showingId = showingId;
+    public void setShowing(Showing showing) {
+        this.showing = showing;
     }
 
     public String getUserId() {
@@ -55,46 +49,6 @@ public class Ticket {
 
     public void setSeat(Seat seat) {
         this.seat = seat;
-    }
-
-    public String getCinema() {
-        return cinema;
-    }
-
-    public void setCinema(String cinema) {
-        this.cinema = cinema;
-    }
-
-    public String getMovie() {
-        return movie;
-    }
-
-    public void setMovie(String movie) {
-        this.movie = movie;
-    }
-
-    public String getSession() {
-        return session;
-    }
-
-    public void setSession(String session) {
-        this.session = session;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
     }
 
 }

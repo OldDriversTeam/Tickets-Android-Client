@@ -10,8 +10,9 @@ public class Movie implements Serializable {
     private String id;
     private String name;
     private String releaseDate;
+    private String type;
     private String storyLine;
-    private String detai;
+    private String detail;
     private String poster;
 
     public String getId() {
@@ -38,6 +39,14 @@ public class Movie implements Serializable {
         this.releaseDate = releaseDate;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getStoryLine() {
         return storyLine;
     }
@@ -46,12 +55,12 @@ public class Movie implements Serializable {
         this.storyLine = storyLine;
     }
 
-    public String getDetai() {
-        return detai;
+    public String getDetail() {
+        return detail;
     }
 
-    public void setDetai(String detai) {
-        this.detai = detai;
+    public void setDetai(String detail) {
+        this.detail = detail;
     }
 
     public String getPoster() {
