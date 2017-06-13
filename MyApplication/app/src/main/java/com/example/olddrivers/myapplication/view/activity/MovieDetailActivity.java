@@ -74,12 +74,12 @@ public class MovieDetailActivity extends AppCompatActivity {
                 movie.setAvgScore(new_movie.getAvgScore());
                 movie.setStoryLine(new_movie.getStoryLine());
                 movie.setReleaseDate(new_movie.getReleaseDate());
-                movie.setDetai(new_movie.getDetai());
+                movie.setDetai(new_movie.getDetail());
                 movie.setMovieType(new_movie.getMovieType());
                 film_name.setText(movie.getName());
                 film_date.setText(movie.getReleaseDate());
                 description_text.setText(movie.getStoryLine());
-                detail_text.setText(movie.getDetai());
+                detail_text.setText(movie.getDetail());
             }
         });
 

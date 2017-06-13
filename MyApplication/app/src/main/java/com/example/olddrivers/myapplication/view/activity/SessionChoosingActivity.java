@@ -79,7 +79,7 @@ public class SessionChoosingActivity extends AppCompatActivity {
                 for (int i = 0; i < showingList.size(); i++) {
                     showingList.get(i).setDate(date);
                     time.add(showingList.get(i).getTime());
-                    room.add(showingList.get(i).getRoomName());
+                    room.add(showingList.get(i).getRoom().getName());
                     price.add(showingList.get(i).getPrice());
                     Map<String, Object> temp = new LinkedHashMap<>();
                     temp.put("time", time.get(i));

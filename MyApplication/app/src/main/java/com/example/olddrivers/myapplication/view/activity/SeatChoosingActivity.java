@@ -73,7 +73,7 @@ public class SeatChoosingActivity extends AppCompatActivity {
         dateTextView.setText(showing.getDate());
         timeTextView.setText(showing.getTime());
 
-        AsynNetUtils.get(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_ROOM_BY_ID + showing.getRoomId(), new AsynNetUtils.Callback() {
+        AsynNetUtils.get(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_ROOM_BY_ID + showing.getRoom().getId(), new AsynNetUtils.Callback() {
             @Override
             public void onResponse(String response) {
                 ParseJSON parseJSON = new ParseJSON(response);
