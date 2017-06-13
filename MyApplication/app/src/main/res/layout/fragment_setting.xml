@@ -84,11 +84,11 @@
                 app:counterEnabled="true"
                 app:counterMaxLength="20">
 
-                <AutoCompleteTextView
+                <EditText
                     android:id="@+id/user_age_setting"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/phone_number"
+                    android:hint="@string/age"
                     android:inputType="number"
                     android:maxLines="1"
                     android:singleLine="true" />
@@ -122,7 +122,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="email"
-                    android:inputType="text"
+                    android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true" />
 
@@ -146,6 +146,15 @@
                 android:layout_marginTop="16dp"
                 android:text="我的电影票"
                 android:textStyle="bold"/>
+
+            <Button
+                android:id="@+id/exit_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="退出登录"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>

@@ -268,7 +268,8 @@ public class ParseJSON {
             String phone = jsonObject.getString("phone");
             String email = jsonObject.getString("email");
             String avatar = jsonObject.getString("avatar");
-            User user = new User(id, name, password);
+            User user = new User(phone, name, password);
+            user.setId(id);
             user.setGender(gender);
             user.setAge(age);
             user.setPhone(phone);
@@ -296,7 +297,8 @@ public class ParseJSON {
             String phone = jsonObject.getString("phone");
             String email = jsonObject.getString("email");
             String avatar = jsonObject.getString("avatar");
-            User user = new User(id, name, password);
+            User user = new User(phone, name, password);
+            user.setId(id);
             user.setGender(gender);
             user.setAge(age);
             user.setPhone(phone);
@@ -321,10 +323,10 @@ public class ParseJSON {
         return exits;
     }
 
-    public Boolean getUpdateResult() {
-        Boolean result = false;
+    public int getUpdateResult() {
+        int result = 0;
         try {
-            result = toParse.getBoolean("result");
+            result = toParse.getInt("state");
         } catch (Exception e) {
             e.printStackTrace();
         }

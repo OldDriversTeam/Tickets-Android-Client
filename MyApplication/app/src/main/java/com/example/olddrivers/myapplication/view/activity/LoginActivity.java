@@ -69,6 +69,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        SharedPreferences sp = getSharedPreferences(LocalServer.USER_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        if (sp.getString(LocalServer.USER_ID, null) != null) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
         InitLogText();
 
         InitPasswordText();
@@ -194,15 +201,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 @Override
                 public void onResponse(String response) {
 
-                    Log.i("state", response + " ");
                     ParseJSON parseJSON = new ParseJSON(response);
                     List<Object> list = parseJSON.getUserAfterLogin();
                     if (list.size() != 0 && (int)list.get(0) == AsynNetUtils.SUCCESSD) {
                         User user = (User)list.get(1);
                         SharedPreferences sp = getSharedPreferences(LocalServer.USER_SHARED_PREFERENCES, Context.MODE_PRIVATE);
-                        sp.edit().putString(LocalServer.USER_NAME, user.getName())
+                        sp.edit().putString(LocalServer.USER_ID, user.getId())
+                                .putString(LocalServer.USER_NAME, user.getName())
+                                .putString(LocalServer.USER_PASSWORD, user.getPassword())
+                                .putString(LocalServer.USER_GENDER, user.getGender())
+                                .putString(LocalServer.USER_AGE, user.getAge())
                                 .putString(LocalServer.USER_PHONE_NUMBER, user.getPhone())
-                                .putString(LocalServer.USER_PASSWORD, user.getPassword()).commit();
+                                .putString(LocalServer.USER_EMAIL, user.getEmail())
+                                .putString(LocalServer.USER_AVATAR, user.getAvatar()).commit();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();

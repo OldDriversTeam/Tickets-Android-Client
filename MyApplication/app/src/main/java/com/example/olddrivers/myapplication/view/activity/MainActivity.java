@@ -1,4 +1,4 @@
-﻿package com.example.olddrivers.myapplication.view.activity;
+package com.example.olddrivers.myapplication.view.activity;
 
 import android.content.res.Resources;
 import android.support.design.widget.TabLayout;
