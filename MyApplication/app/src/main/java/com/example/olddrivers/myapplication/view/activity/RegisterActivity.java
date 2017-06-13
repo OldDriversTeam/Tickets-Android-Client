@@ -165,18 +165,23 @@ public class RegisterActivity extends AppCompatActivity {
                     Log.i("response", response);
                     ParseJSON parseJSON = new ParseJSON(response);
                     List<Object> list = parseJSON.getUserAfterRegister();
-                    if ((int)list.get(0) == AsynNetUtils.SUCCESSD) {
+                    if (list.size() != 0 && (int)list.get(0) == AsynNetUtils.SUCCESSD) {
                         User user = (User)list.get(1);
                         SharedPreferences sp = getSharedPreferences(LocalServer.USER_SHARED_PREFERENCES, Context.MODE_PRIVATE);
-                        sp.edit().putString(LocalServer.USER_NAME, user.getName())
+                        sp.edit().putString(LocalServer.USER_ID, user.getId())
+                                .putString(LocalServer.USER_NAME, user.getName())
+                                .putString(LocalServer.USER_PASSWORD, user.getPassword())
+                                .putString(LocalServer.USER_GENDER, user.getGender())
+                                .putString(LocalServer.USER_AGE, user.getAge())
                                 .putString(LocalServer.USER_PHONE_NUMBER, user.getPhone())
-                                .putString(LocalServer.USER_PASSWORD, user.getPassword()).commit();
+                                .putString(LocalServer.USER_EMAIL, user.getEmail())
+                                .putString(LocalServer.USER_AVATAR, user.getAvatar()).commit();
                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
 
                     } else {
-                        Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this, "注册失败, 手机号已存在", Toast.LENGTH_LONG).show();
                     }
 
                 }

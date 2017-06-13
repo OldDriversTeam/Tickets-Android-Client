@@ -11,6 +11,7 @@ import com.example.olddrivers.myapplication.R;
 import com.example.olddrivers.myapplication.model.Movie;
 import com.example.olddrivers.myapplication.model.Seat;
 import com.example.olddrivers.myapplication.model.Ticket;
+import com.example.olddrivers.myapplication.server.AsynNetUtils;
 import com.example.olddrivers.myapplication.view.adapter.MovieListAdapter;
 import com.example.olddrivers.myapplication.view.adapter.MyTicketsListAdapter;
 
@@ -26,7 +27,7 @@ public class MyTicketsActivity extends AppCompatActivity implements MyTicketsLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_tickets);
 
-        list.add(new Ticket("1", "2", new Seat(1, 2)));
+//        AsynNetUtils.get(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_TICKETS_BY_USER_ID);
 
         setList();
 

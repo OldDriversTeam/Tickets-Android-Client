@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         resources = getResources();
 
         InitViewPager();
-        
+
     }
 
     private void InitViewPager() {

@@ -41,4 +41,13 @@ public class InfoChecker {
 
         return SUCCESS;
     }
+
+    public static int EmailCheck(String email) {
+        return SUCCESS;
+    }
+
+    public static int AgeCheck(String age) {
+        if (age.length() > 3) return INFO_FORMAT_ERR;
+        return SUCCESS;
+    }
 }
