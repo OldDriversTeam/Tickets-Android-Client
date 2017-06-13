@@ -38,11 +38,11 @@ public class MyTicketsListAdapter extends RecyclerView.Adapter<MyTicketsListAdap
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.item = list.get(position);
         holder.imageView.setImageResource(R.mipmap.movie);
-        holder.cinema.setText(holder.item.getCinema());
-        holder.movie.setText(holder.item.getMovie());
-        holder.session.setText(holder.item.getSession());
-        holder.time.setText(holder.item.getTime());
-        holder.price.setText(holder.item.getPrice());
+        holder.cinema.setText(holder.item.getShowing().getCinema().getName());
+        holder.movie.setText(holder.item.getShowing().getMovie().getName());
+        holder.session.setText(holder.item.getShowing().getRoom().getName() + "  " + holder.item.getSeat().toString());
+        holder.time.setText(holder.item.getShowing().getTime());
+        holder.price.setText(holder.item.getShowing().getPrice());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +84,7 @@ public class MyTicketsListAdapter extends RecyclerView.Adapter<MyTicketsListAdap
 
         @Override
         public String toString() {
-            return super.toString() + " '" + item.getMovie() + "'";
+            return super.toString() + " '" + item.getShowing().getMovie().getName() + "'";
         }
     }
 

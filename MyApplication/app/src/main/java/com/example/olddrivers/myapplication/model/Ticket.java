@@ -10,7 +10,6 @@ public class Ticket {
 
     private Showing showing;
     private String userId;
-    private int count;
     private Seat seat;
 
     public Ticket(Showing showing, String userId, Seat seat) {
@@ -33,14 +32,6 @@ public class Ticket {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
     }
 
     public Seat getSeat() {
