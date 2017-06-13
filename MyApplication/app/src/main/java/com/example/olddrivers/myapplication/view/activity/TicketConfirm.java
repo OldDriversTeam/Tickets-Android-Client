@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.example.olddrivers.myapplication.R;
 import com.example.olddrivers.myapplication.model.Seat;
@@ -17,10 +18,13 @@ import java.util.List;
 
 public class TicketConfirm extends AppCompatActivity {
 
-    Bundle bundle_in;
-    List<Seat> selected_seats;
+    TextView cinemaTextView;
+
     GridView gridView;
     SeatGridAdapter gridAdapter;
+
+    Bundle bundle_in;
+    List<Seat> selected_seats;
 
     int seats_count;
 

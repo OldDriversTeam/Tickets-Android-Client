@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.design.widget.AppBarLayout
+    <!--<android.support.design.widget.AppBarLayout
         android:id="@+id/sc_appBar"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
@@ -20,10 +20,53 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
 
-    </android.support.design.widget.AppBarLayout>
+    </android.support.design.widget.AppBarLayout>-->
+
+    <TextView
+        android:id="@+id/sc_movie_name"
+        style="@style/SessionSelectTitle"
+        android:text="神奇" />
+
+    <LinearLayout
+        android:id="@+id/sc_info"
+        android:orientation="vertical"
+        android:layout_below="@id/sc_movie_name"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/sc_cinema"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="金逸"
+            android:textSize="25sp"
+            android:textColor="@color/black"/>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/sc_date"
+                style="@style/SelectSeatDate"
+                android:text="test"/>
+
+            <TextView
+                android:id="@+id/sc_time"
+                style="@style/SelectSeatDate"
+                android:layout_marginLeft="5dp"
+                android:text="test"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <com.example.olddrivers.myapplication.view.activity.SeatTable
-        android:layout_below="@id/sc_appBar"
+        android:layout_below="@id/sc_info"
         android:id="@+id/seatView"
         android:background="#ffffff"
         android:layout_width="wrap_content"

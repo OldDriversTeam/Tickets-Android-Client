@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
@@ -11,7 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.olddrivers.myapplication.R;
+import com.example.olddrivers.myapplication.model.Cinema;
+import com.example.olddrivers.myapplication.model.Movie;
+import com.example.olddrivers.myapplication.model.Room;
 import com.example.olddrivers.myapplication.model.Seat;
+import com.example.olddrivers.myapplication.model.Showing;
+import com.example.olddrivers.myapplication.server.AsynNetUtils;
+import com.example.olddrivers.myapplication.util.ParseJSON;
 import com.example.olddrivers.myapplication.view.adapter.SeatGridAdapter;
 
 import java.util.ArrayList;
@@ -19,11 +26,21 @@ import java.util.List;
 
 public class SeatChoosingActivity extends AppCompatActivity {
 
+    TextView movieTextView;
+    TextView cinemaTextView;
+    TextView dateTextView;
+    TextView timeTextView;
     SeatTable seatTableView;
     Button btn;
-    List<Seat> selected_seats;
     GridView gridView;
     SeatGridAdapter gridAdapter;
+
+    Cinema cinema;
+    Movie movie;
+    Showing showing;
+    Room room;
+    List<Seat> sold_seats;
+    List<Seat> selected_seats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +56,100 @@ public class SeatChoosingActivity extends AppCompatActivity {
     }
 
     void initialze() {
-        /*Bundle bundle_in = getIntent().getExtras();
-        Toast.makeText(this, bundle_in.getString("start_time"), Toast.LENGTH_SHORT).show();*/
+        Bundle bundle_in = getIntent().getExtras();
+        selected_seats = new ArrayList<>();
+        movie = (Movie) bundle_in.getSerializable("movie");
+        cinema = (Cinema) bundle_in.getSerializable("cinema");
+        showing = (Showing) bundle_in.getSerializable("showing");
+
+        movieTextView = (TextView) findViewById(R.id.sc_movie_name);
+        cinemaTextView = (TextView) findViewById(R.id.sc_cinema);
+        dateTextView = (TextView) findViewById(R.id.sc_date);
+        timeTextView = (TextView) findViewById(R.id.sc_time);
+        btn = (Button) findViewById(R.id.btn_toConfirm);
+
+        movieTextView.setText(movie.getName());
+        cinemaTextView.setText(cinema.getName());
+        dateTextView.setText(showing.getDate());
+        timeTextView.setText(showing.getTime());
+
+        AsynNetUtils.get(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_ROOM_BY_ID + showing.getRoomId(), new AsynNetUtils.Callback() {
+            @Override
+            public void onResponse(String response) {
+                ParseJSON parseJSON = new ParseJSON(response);
+                Log.i("response", response);
+                room = parseJSON.getRoomFromId();
+                Log.i("room", room.getRow() + "行" + room.getCol() + "列");
+                seatTableView.setData(Integer.valueOf(room.getRow()),Integer.valueOf(room.getCol()));
+                }
+        });
+
+        AsynNetUtils.get(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_SOLD_SEAT_BY_SHOW + showing.getId(), new AsynNetUtils.Callback() {
+            @Override
+            public void onResponse(String response) {
+                ParseJSON parseJSON = new ParseJSON(response);
+                Log.i("response", response);
+                sold_seats = parseJSON.getSoldSeatsFromShowingId();
+                sold_seats.add(new Seat(1,1));
+                sold_seats.add(new Seat(2,2));
+                sold_seats.add(new Seat(3,3));
+                sold_seats.add(new Seat(4,4));
+                seatTableView.setSeatChecker(new SeatTable.SeatChecker() {
+
+                    @Override
+                    public boolean isValidSeat(int row, int column) {
+                        /*if(column==2) {
+                            return false;
+                        }*/
+                        return true;
+                    }
+
+                    @Override
+                    public boolean isSold(int row, int column) {
+                        for (int i = 0; i < sold_seats.size(); i++) {
+                            if (row == sold_seats.get(i).getRow() - 1
+                                    && column == sold_seats.get(i).getRow() - 1) {
+                                return true;
+                            }
+                        }
+                        /*if(row==6&&column==6){
+                            return true;
+                        }*/
+                        return false;
+                    }
+
+                    @Override
+                    public void checked(int row, int column) {
+                        selected_seats.add(new Seat(row + 1, column + 1));
+                        gridAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void unCheck(int row, int column) {
+
+                        int uncheck_index = -1;
+                        for (int i = 0; i < selected_seats.size(); i++) {
+                            if (row + 1 == selected_seats.get(i).getRow() && column + 1 == selected_seats.get(i).getCol()) {
+                                uncheck_index = i;
+                                break;
+                            }
+                        }
+                        selected_seats.remove(uncheck_index);
+                        gridAdapter.notifyDataSetChanged();
+
+                    }
+
+                    @Override
+                    public String[] checkedSeatTxt(int row, int column) {
+                        return null;
+                    }
+
+                });
+
+            }
+        });
 
         //selected_layout = (LinearLayout) findViewById(R.id.selected_layout);
-
-        selected_seats = new ArrayList<>();
-        btn = (Button) findViewById(R.id.btn_toConfirm);
         /*selected_seats.add(new Seat(0,0));
         selected_seats.add(new Seat(1,1));
         selected_seats.add(new Seat(2,2));
@@ -63,9 +167,9 @@ public class SeatChoosingActivity extends AppCompatActivity {
 
             @Override
             public boolean isValidSeat(int row, int column) {
-                if(column==2) {
+                /*if(column==2) {
                     return false;
-                }
+                }*/
                 return true;
             }
 
@@ -131,7 +235,6 @@ public class SeatChoosingActivity extends AppCompatActivity {
             }
 
         });
-        seatTableView.setData(10,12);
 
     }
 
@@ -141,6 +244,10 @@ public class SeatChoosingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SeatChoosingActivity.this, newTicketConfirm.class);
                 Bundle bundle = new Bundle();
+                bundle.putSerializable("movie", movie);
+                bundle.putSerializable("cinema", cinema);
+                bundle.putSerializable("showing", showing);
+                bundle.putSerializable("room", room);
                 bundle.putInt("count", selected_seats.size());
                 for (int i = 0; i < selected_seats.size(); i++) {
                     bundle.putSerializable("seat" + String.valueOf(i), selected_seats.get(i));
