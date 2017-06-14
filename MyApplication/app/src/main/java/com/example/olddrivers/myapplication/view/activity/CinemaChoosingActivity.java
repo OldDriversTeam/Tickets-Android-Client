@@ -109,7 +109,7 @@ public class CinemaChoosingActivity extends AppCompatActivity {
 
         private static final String ARG_SECTION_NUMBER = "section_number";
         List<Map<String, Object>> data = new ArrayList<>();
-        List<Cinema> cinemas;
+        List<Cinema> cinemas = new ArrayList<>();
         String date;
         List<String> cinemaNames = new ArrayList<>();
         List<String> cinemaIds = new ArrayList<>();
@@ -150,8 +150,13 @@ public class CinemaChoosingActivity extends AppCompatActivity {
                     Log.i("response", response);
                     List<Showing> new_showings = json.getShowingsFromMovieId();
                     int index = getArguments().getInt(ARG_SECTION_NUMBER);
-                    date = new_showings.get(index).getDate();
-                    cinemas = new_showings.get(index).getCinemaList();
+                    if (new_showings.size() == 0) return;
+                    else if (new_showings.size() == 1) {
+                        if (index == 0) {
+                            date = new_showings.get(index).getDate();
+                            cinemas = new_showings.get(index).getCinemaList();
+                        }
+                    }
 
                     for (int i = 0; i < cinemas.size(); i++) {
                         Map<String, Object> temp = new LinkedHashMap<>();
