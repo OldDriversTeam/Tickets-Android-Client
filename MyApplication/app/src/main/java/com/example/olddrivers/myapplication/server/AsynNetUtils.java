@@ -9,8 +9,7 @@ import android.util.Log;
  */
 
 public class AsynNetUtils {
-
-
+    
     //public static String SERVER_ADDRESS = "http://172.18.71.226:8080";
     public static String SERVER_ADDRESS = "http://211.159.183.245:8080/tickets/";
 
