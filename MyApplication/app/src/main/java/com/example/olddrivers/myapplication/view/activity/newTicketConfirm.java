@@ -104,7 +104,7 @@ public class newTicketConfirm extends AppCompatActivity {
                 bundle.putInt("count", selected_seats.size());
                 for (int i = 0; i < selected_seats.size(); i++) {
                     Ticket ticket = new Ticket(showing, userId, selected_seats.get(i));
-                    bundle.putSerializable("ticket" + String.valueOf(i), selected_seats.get(i));
+                    bundle.putSerializable("seat" + String.valueOf(i), selected_seats.get(i));
                 }
                 intent.putExtras(bundle);
                 startActivity(intent);

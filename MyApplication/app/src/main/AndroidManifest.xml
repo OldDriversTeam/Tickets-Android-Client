@@ -16,7 +16,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".view.activity.MainActivity"></activity>
+        <activity android:name=".view.activity.MainActivity"
+            android:launchMode="singleTask"></activity>
         <activity
             android:name=".view.activity.LoginActivity"
             android:label="@string/title_activity_user_login">
@@ -25,11 +26,6 @@
             android:name=".view.activity.MovieDetailActivity"
             android:label="@string/title_activity_movie_detail"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".view.activity.CinemaChoosingActivity"
@@ -58,6 +54,11 @@
             android:name=".view.activity.CompletePayment"
             android:label="@string/title_activity_complete_payment"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

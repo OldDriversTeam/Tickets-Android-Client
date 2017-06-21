@@ -1,5 +1,7 @@
 package com.example.olddrivers.myapplication.view.activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,7 +13,10 @@ import android.widget.TextView;
 
 import com.example.olddrivers.myapplication.R;
 import com.example.olddrivers.myapplication.model.Seat;
+import com.example.olddrivers.myapplication.server.LocalServer;
 import com.example.olddrivers.myapplication.view.adapter.SeatGridAdapter;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +29,8 @@ public class TicketConfirm extends AppCompatActivity {
     SeatGridAdapter gridAdapter;
 
     Bundle bundle_in;
+    SharedPreferences sp;
+    String userId;
     List<Seat> selected_seats;
 
     int seats_count;
@@ -42,6 +49,8 @@ public class TicketConfirm extends AppCompatActivity {
     void initialize() {
         selected_seats = new ArrayList<>();
         bundle_in = getIntent().getExtras();
+        sp = getSharedPreferences(LocalServer.USER_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        userId = sp.getString(LocalServer.USER_ID, "");
         seats_count = bundle_in.getInt("count");
         for (int i = 0; i < seats_count; i++) {
             selected_seats.add((Seat) bundle_in.getSerializable("seat" + String.valueOf(i)));
