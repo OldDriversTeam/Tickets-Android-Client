@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.SearchView;
 
@@ -38,19 +39,22 @@ public class MyTicketsActivity extends AppCompatActivity implements MyTicketsLis
     private void setList() {
         //列表
         SharedPreferences sp = getSharedPreferences(LocalServer.USER_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        final RecyclerView listView = (RecyclerView) findViewById(R.id.ticket_list_mytickets);
 
         AsynNetUtils.get(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_TICKETS_BY_USER_ID + sp.getString(LocalServer.USER_ID, null),
                 new AsynNetUtils.Callback() {
             @Override
             public void onResponse(String response) {
+                Log.i("response", response);
                 ParseJSON parseJSON = new ParseJSON(response);
                 list =  parseJSON.getTicketsFromUserId();
+                MyTicketsListAdapter ma = new MyTicketsListAdapter(list, MyTicketsActivity.this);
+                listView.setAdapter(ma);
             }
         });
 
-        RecyclerView listView = (RecyclerView) findViewById(R.id.ticket_list_mytickets);
-        MyTicketsListAdapter ma = new MyTicketsListAdapter(list, this);
-        listView.setAdapter(ma);
+
+
     }
 
     @Override
