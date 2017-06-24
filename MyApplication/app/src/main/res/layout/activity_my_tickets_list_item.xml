@@ -34,7 +34,6 @@
         <ImageView
             android:id="@+id/image_ticket_item"
             android:layout_gravity="center"
-            android:src="@mipmap/ww"
             android:layout_width="105dp"
             android:layout_height="149dp"
             android:layout_marginLeft="6dp"
@@ -54,7 +53,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="神奇女侠"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -68,7 +66,6 @@
                 android:lines="2"
                 android:ellipsize="end"
                 android:textColor="@color/limegreen"
-                android:text="1号厅 3排5座"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -82,7 +79,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="6月6日 (周二) 14:30"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:layout_marginLeft="@dimen/margin"/>
