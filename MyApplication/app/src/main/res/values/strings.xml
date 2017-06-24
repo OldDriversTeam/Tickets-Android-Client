@@ -23,6 +23,7 @@
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_empty_phone">This phone number can not be empty</string>
     <string name="error_empty_password">This password can not be empty</string>
+    <string name="error_short_password">This password is too short, need 6 elements or more</string>
     <string name="error_empty_user_name">This user name can not be empty</string>
     <string name="error_invalid_phone">This phone number is invalid</string>
     <string name="error_invalid_password">This password is invalid</string>

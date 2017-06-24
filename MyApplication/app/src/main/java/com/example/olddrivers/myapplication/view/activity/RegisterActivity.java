@@ -110,6 +110,10 @@ public class RegisterActivity extends AppCompatActivity {
                 cancel = true;
                 break;
             case InfoChecker.INFO_TOO_SHORT:
+                password.setError(getString(R.string.error_short_password));
+                focusView = password;
+                cancel = true;
+                break;
             case InfoChecker.INFO_FORMAT_ERR:
                 password.setError(getString(R.string.error_incorrect_password));
                 focusView = password;
