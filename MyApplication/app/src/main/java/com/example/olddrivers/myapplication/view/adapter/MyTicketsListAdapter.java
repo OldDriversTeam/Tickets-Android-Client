@@ -1,5 +1,6 @@
 package com.example.olddrivers.myapplication.view.adapter;
 
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.example.olddrivers.myapplication.R;
 import com.example.olddrivers.myapplication.model.Movie;
 import com.example.olddrivers.myapplication.model.Ticket;
+import com.example.olddrivers.myapplication.server.AsynNetUtils;
 
 import java.util.List;
 
@@ -37,7 +39,12 @@ public class MyTicketsListAdapter extends RecyclerView.Adapter<MyTicketsListAdap
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.item = list.get(position);
-        holder.imageView.setImageResource(R.mipmap.movie);
+        AsynNetUtils.getBitmap(holder.item.getShowing().getMovie().getPoster(), new AsynNetUtils.BitmapCallback() {
+            @Override
+            public void onResponse(Bitmap response) {
+                holder.imageView.setImageBitmap(response);
+            }
+        });
         holder.cinema.setText(holder.item.getShowing().getCinema().getName());
         holder.movie.setText(holder.item.getShowing().getMovie().getName());
         holder.session.setText(holder.item.getShowing().getRoom().getName() + "  " + holder.item.getSeat().toString());
