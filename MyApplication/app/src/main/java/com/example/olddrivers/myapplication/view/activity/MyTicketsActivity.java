@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.example.olddrivers.myapplication.R;
 import com.example.olddrivers.myapplication.model.Movie;
@@ -43,9 +44,9 @@ public class MyTicketsActivity extends AppCompatActivity implements MyTicketsLis
 
     private void setToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_mytickets);
-        toolbar.setLogo(R.mipmap.ic_launcher);
-        toolbar.setTitle("我的电影票");
-//        toolbar.setSubtitle("");
+//        toolbar.setLogo(R.mipmap.ic_launcher);
+        toolbar.setTitle("");
+        ((TextView)findViewById(R.id.title_mytickets)).setText("我的电影票");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

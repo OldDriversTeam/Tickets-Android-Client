@@ -11,7 +11,18 @@
         android:background="@color/colorPrimary"
         android:id="@+id/toolbar_mytickets"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:minHeight="70dp"
+        >
+
+        <TextView
+            android:text="我的电影票"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:id="@+id/title_mytickets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </android.support.v7.widget.Toolbar>
 

@@ -53,24 +53,22 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_marginRight="102dp"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="54dp" />
+        android:layout_marginTop="54dp"
+        app:layout_constraintLeft_toRightOf="@+id/image_ticket_item"
+        android:layout_marginLeft="21dp" />
 
     <TextView
         android:id="@+id/session_ticket_item"
         android:textColor="@color/limegreen"
         android:text="1号厅 3排5座"
-        android:layout_width="175dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="92dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintVertical_bias="0.0"
-        android:layout_marginRight="77dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        android:layout_width="157dp"
+        android:layout_height="49dp"
+        app:layout_constraintLeft_toRightOf="@+id/image_ticket_item"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/movie_name_ticket_item"
+        tools:layout_editor_absoluteY="98dp" />
 
     <TextView
         android:id="@+id/time_ticket_item"
@@ -81,22 +79,20 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
-        android:layout_marginRight="98dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintLeft_toRightOf="@+id/image_ticket_item"
+        android:layout_marginLeft="21dp" />
 
-    <TextView
-        android:id="@+id/price_ticket_item"
-        android:textColor="@color/crimson"
-        android:text="总价\n200元"
-        android:textSize="22sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/session_ticket_item"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        android:layout_marginBottom="59dp" />
+    <!--<TextView-->
+        <!--android:id="@+id/price_ticket_item"-->
+        <!--android:textColor="@color/crimson"-->
+        <!--android:text="总价\n200元"-->
+        <!--android:textSize="20sp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/session_ticket_item"-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--tools:layout_editor_absoluteY="92dp" />-->
 
 </android.support.constraint.ConstraintLayout>
