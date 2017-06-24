@@ -94,7 +94,7 @@ public class SessionChoosingActivity extends AppCompatActivity {
                     room.add(showingList.get(i).getRoom().getName());
                     price.add(showingList.get(i).getPrice());
                     Map<String, Object> temp = new LinkedHashMap<>();
-                    temp.put("time", time.get(i));
+                    temp.put("time", time.get(i).substring(0, 5).replace("-", ":"));
                     temp.put("room", room.get(i));
                     temp.put("price", price.get(i));
                     session_data.add(temp);

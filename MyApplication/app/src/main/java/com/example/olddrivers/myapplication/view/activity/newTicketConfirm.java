@@ -32,6 +32,7 @@ import java.util.List;
 
 public class newTicketConfirm extends AppCompatActivity {
 
+    Toolbar toolbar;
     TextView movieTextView;
     TextView cinemaTextView;
     TextView dateTextView;
@@ -56,8 +57,6 @@ public class newTicketConfirm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_ticket_confirm);
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.ntoolbar);
-        setSupportActionBar(toolbar);*/
 
         initialize();
         setListener();
@@ -87,7 +86,18 @@ public class newTicketConfirm extends AppCompatActivity {
         cinemaTextView.setText(cinema.getName());
         dateTextView.setText(showing.getDate());
         roomTextView.setText(room.getName());
-        timeTextView.setText(showing.getTime());
+        timeTextView.setText(showing.getTime().substring(0, 5).replace("-", ":"));
+        toolbar = (Toolbar) findViewById(R.id.tc_toolbar);
+        toolbar.setTitle(movie.getName());
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        toolbar.setTitle("");
 
         AsynNetUtils.getBitmap(movie.getPoster(), new AsynNetUtils.BitmapCallback() {
             @Override

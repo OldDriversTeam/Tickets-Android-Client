@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.olddrivers.myapplication.view.activity.newTicketConfirm">
 
-    <!--<android.support.design.widget.AppBarLayout
+    <android.support.design.widget.AppBarLayout
         android:id="@+id/ntc_appBarLayout"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
@@ -14,22 +14,27 @@
         android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/ntoolbar"
+            android:id="@+id/tc_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" >
 
-    </android.support.design.widget.AppBarLayout>-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/title_activity_new_ticket_confirm"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"/>
 
-    <TextView
-        android:id="@+id/ntc_title"
-        style="@style/SessionSelectTitle"
-        android:text="订单确认" />
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_below="@id/ntc_title"
+        android:layout_below="@id/ntc_appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"

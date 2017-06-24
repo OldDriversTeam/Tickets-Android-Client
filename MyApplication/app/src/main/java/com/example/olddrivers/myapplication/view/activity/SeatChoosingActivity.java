@@ -78,7 +78,7 @@ public class SeatChoosingActivity extends AppCompatActivity {
 
         cinemaTextView.setText(cinema.getName());
         dateTextView.setText(showing.getDate());
-        timeTextView.setText(showing.getTime());
+        timeTextView.setText(showing.getTime().substring(0, 5).replace("-", ":"));
 
         AsynNetUtils.get(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_ROOM_BY_ID + showing.getRoom().getId(), new AsynNetUtils.Callback() {
             @Override
@@ -160,7 +160,7 @@ public class SeatChoosingActivity extends AppCompatActivity {
 
         seatTableView = (SeatTable) findViewById(R.id.seatView);
         seatTableView.setScreenName("荧幕");//设置屏幕名称
-        seatTableView.setMaxSelected(9);//设置最多选中
+        seatTableView.setMaxSelected(6);//设置最多选中
 
     }
 

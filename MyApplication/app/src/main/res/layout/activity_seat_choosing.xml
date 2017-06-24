@@ -76,7 +76,7 @@
             android:id="@+id/seat_gridview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnWidth="50dp"
+            android:columnWidth="100dp"
             android:numColumns="auto_fit"
             android:verticalSpacing="10dp"
             android:horizontalSpacing="10dp"
