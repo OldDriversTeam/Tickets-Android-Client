@@ -71,9 +71,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         SharedPreferences sp = getSharedPreferences(LocalServer.USER_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         if (sp.getString(LocalServer.USER_ID, null) != null) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("phone", sp.getString(LocalServer.USER_PHONE_NUMBER, null));
+                jsonObject.put("password", sp.getString(LocalServer.USER_PASSWORD, null));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            AsynNetUtils.post(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.POST_LOGIN, jsonObject.toString(), new AsynNetUtils.Callback() {
+                @Override
+                public void onResponse(String response) {
+                    ParseJSON parseJSON = new ParseJSON(response);
+                    List<Object> list = parseJSON.getUserAfterLogin();
+                    if (list.size() != 0 && (int)list.get(0) == AsynNetUtils.SUCCESSD) {
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "密码已经更改，请重新登录", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
         }
 
         InitLogText();
@@ -165,7 +183,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 focusView = mPasswordView;
                 cancel = true;
                 break;
-
         }
 
         switch (InfoChecker.PhoneNumberCheck(phoneNumber)) {
@@ -180,11 +197,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 focusView = mPhoneView;
                 cancel = true;
                 break;
-
         }
 
         if (cancel) {
-
             focusView.requestFocus();
         } else {
 
@@ -200,7 +215,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             AsynNetUtils.post(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.POST_LOGIN, jsonObject.toString(), new AsynNetUtils.Callback() {
                 @Override
                 public void onResponse(String response) {
-
                     ParseJSON parseJSON = new ParseJSON(response);
                     List<Object> list = parseJSON.getUserAfterLogin();
                     if (list.size() != 0 && (int)list.get(0) == AsynNetUtils.SUCCESSD) {
