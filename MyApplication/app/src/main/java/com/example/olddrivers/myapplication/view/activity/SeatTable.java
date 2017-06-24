@@ -32,13 +32,18 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+
 import com.example.olddrivers.myapplication.R;
+import com.example.olddrivers.myapplication.model.Seat;
 
 /**
  * Created by baoyunlong on 16/6/16.
  */
 public class SeatTable extends View {
     private final boolean DBG = false;
+
+    public List<Seat> solded_seats = new ArrayList<>();
 
     Paint paint = new Paint();
     Paint overviewPaint=new Paint();

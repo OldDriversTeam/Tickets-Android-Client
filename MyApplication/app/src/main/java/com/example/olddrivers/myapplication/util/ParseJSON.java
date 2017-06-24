@@ -204,7 +204,7 @@ public class ParseJSON {
         List<Seat> seats = new ArrayList<>();
         try {
             int size = toParse.getInt("size");
-            JSONArray jsonArray = toParse.getJSONArray("seatsSoldList");
+            JSONArray jsonArray = toParse.getJSONArray("seatSoldList");
             for (int i = 0; i < size; i++) {
                 JSONArray seatArray = jsonArray.getJSONArray(i);
                 Seat seat = new Seat(seatArray.getInt(0), seatArray.getInt(1));

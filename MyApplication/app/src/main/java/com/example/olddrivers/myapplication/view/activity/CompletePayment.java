@@ -83,8 +83,8 @@ public class CompletePayment extends AppCompatActivity {
             JSONArray jsonArray = new JSONArray();
             for (int i = 0; i < count; i++) {
                 int[] seat = new int[2];
-                seat[0] = seats.get(i).getCol();
-                seat[1] = seats.get(i).getRow();
+                seat[0] = seats.get(i).getRow();
+                seat[1] = seats.get(i).getCol();
                 JSONArray seatArray = new JSONArray(seat);
                 jsonArray.put(seatArray);
             }

@@ -88,33 +88,25 @@ public class SeatChoosingActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 ParseJSON parseJSON = new ParseJSON(response);
-                Log.i("response", response);
+                Log.i("solded response", response);
                 sold_seats = parseJSON.getSoldSeatsFromShowingId();
-                sold_seats.add(new Seat(1,1));
-                sold_seats.add(new Seat(2,2));
-                sold_seats.add(new Seat(3,3));
-                sold_seats.add(new Seat(4,4));
+                seatTableView.solded_seats = sold_seats;
+                Log.i("solded response", String.valueOf(seatTableView.solded_seats.size()));
                 seatTableView.setSeatChecker(new SeatTable.SeatChecker() {
 
                     @Override
                     public boolean isValidSeat(int row, int column) {
-                        /*if(column==2) {
-                            return false;
-                        }*/
                         return true;
                     }
 
                     @Override
                     public boolean isSold(int row, int column) {
-                        for (int i = 0; i < sold_seats.size(); i++) {
-                            if (row == sold_seats.get(i).getRow() - 1
-                                    && column == sold_seats.get(i).getRow() - 1) {
+                        for (int i = 0; i < seatTableView.solded_seats.size(); i++) {
+                            if (row == seatTableView.solded_seats.get(i).getRow() - 1
+                                    && column == seatTableView.solded_seats.get(i).getCol() - 1) {
                                 return true;
                             }
                         }
-                        /*if(row==6&&column==6){
-                            return true;
-                        }*/
                         return false;
                     }
 
@@ -162,79 +154,6 @@ public class SeatChoosingActivity extends AppCompatActivity {
         seatTableView = (SeatTable) findViewById(R.id.seatView);
         seatTableView.setScreenName("荧幕");//设置屏幕名称
         seatTableView.setMaxSelected(9);//设置最多选中
-
-        seatTableView.setSeatChecker(new SeatTable.SeatChecker() {
-
-            @Override
-            public boolean isValidSeat(int row, int column) {
-                /*if(column==2) {
-                    return false;
-                }*/
-                return true;
-            }
-
-            @Override
-            public boolean isSold(int row, int column) {
-                if(row==6&&column==6){
-                    return true;
-                }
-                return false;
-            }
-
-            @Override
-            public void checked(int row, int column) {
-                /*int temp = selected_seats.size();
-                selected_seats.add(new Seat(row, column));
-                switch (temp) {
-                    case 0: changing = (TextView) findViewById(R.id.selected1); break;
-                    case 1: changing = (TextView) findViewById(R.id.selected2); break;
-                    case 2: changing = (TextView) findViewById(R.id.selected3); break;
-                }
-                changing.setText(String.valueOf(row) + "行" + String.valueOf(column) + "列");
-                changing.setVisibility(View.VISIBLE);*/
-
-                selected_seats.add(new Seat(row + 1, column + 1));
-                gridAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void unCheck(int row, int column) {
-                /*int uncheck_index = -1;
-                for (int i = 0; i < selected_seats.size(); i++) {
-                    if (row == selected_seats.get(i).getRow() && column == selected_seats.get(i).getCol()) {
-                        uncheck_index = i;
-                        break;
-                    }
-                }
-
-                switch (uncheck_index) {
-                    case 0: changing = (TextView) findViewById(R.id.selected1); break;
-                    case 1: changing = (TextView) findViewById(R.id.selected2); break;
-                    case 2: changing = (TextView) findViewById(R.id.selected3); break;
-                }
-
-                if (uncheck_index == (selected_seats.size() - 1)) {
-                    changing.setVisibility(View.INVISIBLE);
-                }*/
-
-                int uncheck_index = -1;
-                for (int i = 0; i < selected_seats.size(); i++) {
-                    if (row + 1 == selected_seats.get(i).getRow() && column + 1 == selected_seats.get(i).getCol()) {
-                        uncheck_index = i;
-                        break;
-                    }
-                }
-                selected_seats.remove(uncheck_index);
-                gridAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public String[] checkedSeatTxt(int row, int column) {
-                return null;
-            }
-
-        });
 
     }
 
