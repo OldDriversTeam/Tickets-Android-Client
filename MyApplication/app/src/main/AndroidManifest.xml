@@ -21,6 +21,11 @@
         <activity
             android:name=".view.activity.LoginActivity"
             android:label="@string/title_activity_user_login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".view.activity.MovieDetailActivity"
@@ -54,11 +59,6 @@
             android:name=".view.activity.CompletePayment"
             android:label="@string/title_activity_complete_payment"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

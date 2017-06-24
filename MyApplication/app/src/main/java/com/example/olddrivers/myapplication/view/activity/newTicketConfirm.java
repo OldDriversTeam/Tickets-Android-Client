@@ -3,6 +3,7 @@ package com.example.olddrivers.myapplication.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import com.example.olddrivers.myapplication.model.Room;
 import com.example.olddrivers.myapplication.model.Seat;
 import com.example.olddrivers.myapplication.model.Showing;
 import com.example.olddrivers.myapplication.model.Ticket;
+import com.example.olddrivers.myapplication.server.AsynNetUtils;
 import com.example.olddrivers.myapplication.server.LocalServer;
 import com.example.olddrivers.myapplication.view.adapter.SeatGridAdapter;
 
@@ -29,10 +32,12 @@ import java.util.List;
 
 public class newTicketConfirm extends AppCompatActivity {
 
+    TextView movieTextView;
     TextView cinemaTextView;
     TextView dateTextView;
     TextView roomTextView;
     TextView timeTextView;
+    ImageView imageView;
     GridView gridView;
     SeatGridAdapter gridAdapter;
     Button btn;
@@ -70,16 +75,26 @@ public class newTicketConfirm extends AppCompatActivity {
         room = (Room) bundle_in.getSerializable("room");
         seats_count = bundle_in.getInt("count");
 
+        movieTextView = (TextView) findViewById(R.id.ntc_movie);
         cinemaTextView = (TextView) findViewById(R.id.ntc_cinema);
         dateTextView = (TextView) findViewById(R.id.ntc_date);
         roomTextView = (TextView) findViewById(R.id.ntc_room);
         timeTextView = (TextView) findViewById(R.id.ntc_time);
+        imageView = (ImageView) findViewById(R.id.ntc_image);
         btn = (Button) findViewById(R.id.btn_ticket_confirm);
 
+        movieTextView.setText(movie.getName());
         cinemaTextView.setText(cinema.getName());
         dateTextView.setText(showing.getDate());
         roomTextView.setText(room.getName());
         timeTextView.setText(showing.getTime());
+
+        AsynNetUtils.getBitmap(movie.getPoster(), new AsynNetUtils.BitmapCallback() {
+            @Override
+            public void onResponse(Bitmap response) {
+                imageView.setImageBitmap(response);
+            }
+        });
 
         for (int i = 0; i < seats_count; i++) {
             selected_seats.add((Seat) bundle_in.getSerializable("seat" + String.valueOf(i)));

@@ -52,25 +52,16 @@ public class CompletePayment extends AppCompatActivity {
     }
 
     void initialize() {
-        /*sp = getSharedPreferences(LocalServer.USER_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        sp = getSharedPreferences(LocalServer.USER_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         bundle_in = getIntent().getExtras();
         btn = (Button) findViewById(R.id.btn_returnMainPage);
         showingId = ( (Showing) bundle_in.getSerializable("showing")).getId();
         userId = sp.getString(LocalServer.USER_ID, "");
-        count = bundle_in.getInt("count");*/
-        btn = (Button) findViewById(R.id.btn_returnMainPage);
-        showingId = "showingId";
-        userId = "userId";
-        count = 2;
+        count = bundle_in.getInt("count");
         seats = new ArrayList<>();
-        /*for (int i = 0; i < count; i++) {
-            seats.add((Seat) bundle_in.getSerializable("seat" + String.valueOf(i)));
-        }*/
         for (int i = 0; i < count; i++) {
-            seats.add(new Seat(i, i));
+            seats.add((Seat) bundle_in.getSerializable("seat" + String.valueOf(i)));
         }
-        Log.i("ddddddddddd", String.valueOf(seats.size()));
-
     }
 
     void setListener() {
@@ -102,7 +93,7 @@ public class CompletePayment extends AppCompatActivity {
             AsynNetUtils.post(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.POST_BUY_TICKETS, jsonObject.toString(), new AsynNetUtils.Callback() {
                 @Override
                 public void onResponse(String response) {
-
+                    Log.i("buy response", response);
                 }
             });
         } catch (Exception e) {

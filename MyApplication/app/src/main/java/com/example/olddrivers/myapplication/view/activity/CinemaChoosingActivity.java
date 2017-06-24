@@ -147,15 +147,22 @@ public class CinemaChoosingActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(String response) {
                     ParseJSON json = new ParseJSON(response);
-                    Log.i("response", response);
+                    Log.i("showings response", response);
                     List<Showing> new_showings = json.getShowingsFromMovieId();
                     int index = getArguments().getInt(ARG_SECTION_NUMBER);
-                    if (new_showings.size() == 0) return;
+                    if (new_showings.size() == 0) {
+                        Log.i("sddddddddddd", "两天均无排场");
+                        return;
+                    }
                     else if (new_showings.size() == 1) {
+                        date = new_showings.get(index).getDate();
                         if (index == 0) {
                             date = new_showings.get(index).getDate();
                             cinemas = new_showings.get(index).getCinemaList();
                         }
+                    } else {
+                        date = new_showings.get(index).getDate();
+                        cinemas = new_showings.get(index).getCinemaList();
                     }
 
                     for (int i = 0; i < cinemas.size(); i++) {
@@ -163,13 +170,13 @@ public class CinemaChoosingActivity extends AppCompatActivity {
                         cinemaNames.add(cinemas.get(i).getName());
                         cinemaIds.add(cinemas.get(i).getId());
                         temp.put("name", cinemaNames.get(i));
-                        temp.put("price", cinemaIds.get(i));
+                        temp.put("id", cinemaIds.get(i));
                         data.add(temp);
                     }
 
                     Log.i("create", getActivity().toString());
                     simpleAdapter = new SimpleAdapter(getActivity(), data, R.layout.cinema_item,
-                            new String[] {"name", "price"}, new int[] {R.id.cinema_name, R.id.cinema_price});
+                            new String[] {"name", "id"}, new int[] {R.id.cinema_name, R.id.cinema_price});
                     listView.setAdapter(simpleAdapter);
 
                 }

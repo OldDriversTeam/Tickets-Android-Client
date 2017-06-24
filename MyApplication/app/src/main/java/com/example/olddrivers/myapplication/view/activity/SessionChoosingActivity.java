@@ -74,6 +74,7 @@ public class SessionChoosingActivity extends AppCompatActivity {
         AsynNetUtils.get(url, new AsynNetUtils.Callback() {
             @Override
             public void onResponse(String response) {
+                Log.i("session response", response);
                 ParseJSON parseJSON = new ParseJSON(response);
                 showingList = parseJSON.getShowingListFromCDM();
                 for (int i = 0; i < showingList.size(); i++) {

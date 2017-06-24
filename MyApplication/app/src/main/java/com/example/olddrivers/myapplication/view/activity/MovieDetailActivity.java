@@ -1,6 +1,7 @@
 package com.example.olddrivers.myapplication.view.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -22,7 +23,7 @@ import com.example.olddrivers.myapplication.util.ParseJSON;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
-
+    ImageView film_image;
     TextView film_name;
     TextView film_date;
     LinearLayout description_layout;
@@ -50,6 +51,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     void initialize() {
 
+        film_image = (ImageView) findViewById(R.id.filmDetail_image);
         film_name = (TextView) findViewById(R.id.filmDetail_name);
         film_date = (TextView) findViewById(R.id.filmDetail_date);
         description_layout = (LinearLayout) findViewById(R.id.description_layout);
@@ -67,6 +69,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         AsynNetUtils.get(AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_MOVIE_BY_ID + movie.getId(), new AsynNetUtils.Callback() {
             @Override
             public void onResponse(String response) {
+                Log.i("movie detail", response);
                 ParseJSON json = new ParseJSON(response);
                 Movie new_movie = json.getMovieFromId();
                 movie.setId(new_movie.getId());
@@ -80,6 +83,12 @@ public class MovieDetailActivity extends AppCompatActivity {
                 film_date.setText(movie.getReleaseDate());
                 description_text.setText(movie.getStoryLine());
                 detail_text.setText(movie.getDetail());
+                AsynNetUtils.getBitmap(movie.getPoster(), new AsynNetUtils.BitmapCallback() {
+                    @Override
+                    public void onResponse(Bitmap response) {
+                        film_image.setImageBitmap(response);
+                    }
+                });
             }
         });
 

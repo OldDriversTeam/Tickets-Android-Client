@@ -12,8 +12,9 @@
         android:layout_height="250dp">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/filmDetail_image"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:src="@mipmap/ww" />
