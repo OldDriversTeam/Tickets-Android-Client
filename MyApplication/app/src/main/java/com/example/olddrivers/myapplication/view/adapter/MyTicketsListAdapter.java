@@ -42,7 +42,7 @@ public class MyTicketsListAdapter extends RecyclerView.Adapter<MyTicketsListAdap
         holder.movie.setText(holder.item.getShowing().getMovie().getName());
         holder.session.setText(holder.item.getShowing().getRoom().getName() + "  " + holder.item.getSeat().toString());
         holder.time.setText(holder.item.getShowing().getTime());
-        holder.price.setText(holder.item.getShowing().getPrice());
+//        holder.price.setText(holder.item.getShowing().getPrice());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +66,7 @@ public class MyTicketsListAdapter extends RecyclerView.Adapter<MyTicketsListAdap
         public final TextView movie;
         public final TextView session;
         public final TextView time;
-        public final TextView price;
+//        public final TextView price;
         public Ticket item;
 
         public ViewHolder(View view) {
@@ -78,7 +78,7 @@ public class MyTicketsListAdapter extends RecyclerView.Adapter<MyTicketsListAdap
             movie = (TextView) view.findViewById(R.id.movie_name_ticket_item);
             session = (TextView) view.findViewById(R.id.session_ticket_item);
             time = (TextView) view.findViewById(R.id.time_ticket_item);
-            price = (TextView) view.findViewById(R.id.price_ticket_item);
+//            price = (TextView) view.findViewById(R.id.price_ticket_item);
 
         }
 
