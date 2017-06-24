@@ -45,8 +45,8 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
             }
         });
         holder.name.setText(holder.item.getName());
-        holder.score.setText(String.valueOf(holder.item.getAvgScore()));
-        holder.message.setText(holder.item.getDetail());
+        holder.score.setText("评分 ：" + String.valueOf(holder.item.getAvgScore()));
+        holder.message.setText(holder.item.getStoryLine());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

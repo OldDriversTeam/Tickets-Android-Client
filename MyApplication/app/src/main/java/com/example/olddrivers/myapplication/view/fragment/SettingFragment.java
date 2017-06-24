@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.olddrivers.myapplication.R;
@@ -38,6 +40,7 @@ public class SettingFragment extends Fragment {
 
     private AutoCompleteTextView userNameView;
     private EditText ageView, phoneView, emailView;
+    private RadioGroup group;
 
     private SharedPreferences sp;
 
@@ -55,6 +58,8 @@ public class SettingFragment extends Fragment {
         sp = getContext().getSharedPreferences(LocalServer.USER_SHARED_PREFERENCES, Context.MODE_PRIVATE);
 
         InitUserNameView();
+
+        InitSexView();
 
         InitAgeView();
 
@@ -78,6 +83,20 @@ public class SettingFragment extends Fragment {
         userNameView = (AutoCompleteTextView) view.findViewById(R.id.user_name_setting);
         userNameView.setText(sp.getString(LocalServer.USER_NAME, null));
 
+    }
+
+    private void InitSexView() {
+        group = (RadioGroup)view.findViewById(R.id.radio_group_setting);
+        RadioButton male = (RadioButton)view.findViewById(R.id.radio_button_male);
+        RadioButton female = (RadioButton)view.findViewById(R.id.radio_button_female);
+        String gender = sp.getString(LocalServer.USER_GENDER, null);
+        if (gender != null) {
+            if (gender.equals("male")) {
+                male.setChecked(true);
+            } else {
+                female.setChecked(true);
+            }
+        }
     }
 
     private void InitAgeView() {
@@ -145,6 +164,12 @@ public class SettingFragment extends Fragment {
 
         // Store values at the time of the login attempt.
         String sUserName = userNameView.getText().toString();
+        String sGender = null;
+        if (group.getCheckedRadioButtonId() == R.id.radio_button_male) {
+            sGender = "male";
+        } else if (group.getCheckedRadioButtonId() == R.id.radio_button_female) {
+            sGender = "female";
+        }
         String sPhoneNumber = phoneView.getText().toString();
         String sAge = ageView.getText().toString();
         String sEmail = emailView.getText().toString();
@@ -199,13 +224,12 @@ public class SettingFragment extends Fragment {
         if (cancel) {
             focusView.requestFocus();
         } else {
-            JSONObject jsonObject = new JSONObject();
+            final JSONObject jsonObject = new JSONObject();
             try {
-                Log.i("id", sp.getString(LocalServer.USER_ID, null));
                 jsonObject.put("id", sp.getString(LocalServer.USER_ID, null));
                 jsonObject.put("name", sUserName);
                 jsonObject.put("password", sp.getString(LocalServer.USER_PASSWORD, null));
-                jsonObject.put("gender", sp.getString(LocalServer.USER_GENDER, null));
+                jsonObject.put("gender", sGender);
                 jsonObject.put("age", sAge);
                 jsonObject.put("phone", sp.getString(LocalServer.USER_PHONE_NUMBER, null));
                 jsonObject.put("email", sEmail);
@@ -219,6 +243,19 @@ public class SettingFragment extends Fragment {
                     ParseJSON parseJSON = new ParseJSON(response);
                     if (parseJSON.getUpdateResult() == AsynNetUtils.SUCCESSD) {
                         Toast.makeText(getActivity(), "设置成功", Toast.LENGTH_LONG).show();
+                        try {
+                            sp.edit().putString(LocalServer.USER_ID, jsonObject.getString("id"))
+                                    .putString(LocalServer.USER_NAME, jsonObject.getString("name"))
+                                    .putString(LocalServer.USER_PASSWORD, jsonObject.getString("password"))
+                                    .putString(LocalServer.USER_GENDER, jsonObject.getString("gender"))
+                                    .putString(LocalServer.USER_AGE, jsonObject.getString("age"))
+                                    .putString(LocalServer.USER_PHONE_NUMBER, jsonObject.getString("phone"))
+                                    .putString(LocalServer.USER_EMAIL, jsonObject.getString("email"))
+                                    .putString(LocalServer.USER_AVATAR, jsonObject.getString("avatar")).commit();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                     } else {
                         Toast.makeText(getActivity(), "设置失败", Toast.LENGTH_LONG).show();
                     }
