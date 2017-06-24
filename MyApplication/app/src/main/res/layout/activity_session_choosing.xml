@@ -1,53 +1,75 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.olddrivers.myapplication.view.activity.SessionChoosingActivity">
 
-    <TextView
-        android:id="@+id/ss_cinema_name"
-        style="@style/SessionSelectTitle"
-        android:text="金逸" />
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
 
-    <TextView
-        android:id="@+id/ss_movie_name"
-        style="@style/SessionSelectTitle"
-        android:text="神奇" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/sc_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay">
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_test" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@drawable/divider_thin"
-        android:showDividers="middle">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:id="@+id/ss_cinema_name"
+            style="@style/SessionSelectTitle"
+            android:text="金逸" />
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:divider="@drawable/divider_thin"
+            android:showDividers="middle">
 
-            <TextView
-                style="@style/SessionTitle"
-                android:text="放映时间"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
 
-            <TextView
-                style="@style/SessionTitle"
-                android:text="放映厅"/>
+                <TextView
+                    style="@style/SessionTitle"
+                    android:text="放映时间"/>
 
-            <TextView
-                style="@style/SessionTitle"
-                android:text="票价（元）"/>
+                <TextView
+                    style="@style/SessionTitle"
+                    android:text="放映厅"/>
+
+                <TextView
+                    style="@style/SessionTitle"
+                    android:text="票价（元）"/>
+
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/ss_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 
-        <ListView
-            android:id="@+id/ss_listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
     </LinearLayout>
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

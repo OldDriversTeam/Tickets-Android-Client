@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.olddrivers.myapplication.R;
 import com.example.olddrivers.myapplication.model.Cinema;
@@ -26,7 +27,7 @@ import java.util.List;
 
 public class SeatChoosingActivity extends AppCompatActivity {
 
-    TextView movieTextView;
+    Toolbar toolbar;
     TextView cinemaTextView;
     TextView dateTextView;
     TextView timeTextView;
@@ -47,9 +48,6 @@ public class SeatChoosingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seat_choosing);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         initialze();
         setListener();
 
@@ -61,14 +59,23 @@ public class SeatChoosingActivity extends AppCompatActivity {
         movie = (Movie) bundle_in.getSerializable("movie");
         cinema = (Cinema) bundle_in.getSerializable("cinema");
         showing = (Showing) bundle_in.getSerializable("showing");
+        toolbar = (Toolbar) findViewById(R.id.seat_toolbar);
+        toolbar.setTitle(movie.getName());
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        toolbar.setTitle(movie.getName());
 
-        movieTextView = (TextView) findViewById(R.id.sc_movie_name);
         cinemaTextView = (TextView) findViewById(R.id.sc_cinema);
         dateTextView = (TextView) findViewById(R.id.sc_date);
         timeTextView = (TextView) findViewById(R.id.sc_time);
         btn = (Button) findViewById(R.id.btn_toConfirm);
 
-        movieTextView.setText(movie.getName());
         cinemaTextView.setText(cinema.getName());
         dateTextView.setText(showing.getDate());
         timeTextView.setText(showing.getTime());
@@ -161,6 +168,12 @@ public class SeatChoosingActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (selected_seats.size() == 0) {
+                    Toast.makeText(SeatChoosingActivity.this, "仍未选择座位", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 Intent intent = new Intent(SeatChoosingActivity.this, newTicketConfirm.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("movie", movie);

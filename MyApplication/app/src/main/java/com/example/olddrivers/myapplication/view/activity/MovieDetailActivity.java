@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -23,6 +24,7 @@ import com.example.olddrivers.myapplication.util.ParseJSON;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
+    Toolbar toolbar;
     ImageView film_image;
     TextView film_name;
     TextView film_date;
@@ -50,6 +52,17 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     void initialize() {
+
+        toolbar = (Toolbar) findViewById(R.id.md_toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         film_image = (ImageView) findViewById(R.id.filmDetail_image);
         film_name = (TextView) findViewById(R.id.filmDetail_name);

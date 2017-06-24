@@ -1,97 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context="com.example.olddrivers.myapplication.view.activity.SeatChoosingActivity">
 
-    <!--<android.support.design.widget.AppBarLayout
-        android:id="@+id/sc_appBar"
-        android:layout_alignParentTop="true"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/seat_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
 
-    </android.support.design.widget.AppBarLayout>-->
+    </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:id="@+id/sc_movie_name"
-        style="@style/SessionSelectTitle"
-        android:text="神奇" />
-
-    <LinearLayout
-        android:id="@+id/sc_info"
-        android:orientation="vertical"
-        android:layout_below="@id/sc_movie_name"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:paddingLeft="5dp"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:id="@+id/sc_cinema"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="金逸"
-            android:textSize="25sp"
-            android:textColor="@color/black"/>
-        
         <LinearLayout
+            android:id="@+id/sc_info"
+            android:orientation="vertical"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/sc_date"
-                style="@style/SelectSeatDate"
-                android:text="test"/>
+                android:id="@+id/sc_cinema"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="金逸"
+                android:textSize="25sp"
+                android:textColor="@color/black"/>
 
-            <TextView
-                android:id="@+id/sc_time"
-                style="@style/SelectSeatDate"
-                android:layout_marginLeft="5dp"
-                android:text="test"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+                <TextView
+                    android:id="@+id/sc_date"
+                    style="@style/SelectSeatDate"
+                    android:text="test"/>
+
+                <TextView
+                    android:id="@+id/sc_time"
+                    style="@style/SelectSeatDate"
+                    android:layout_marginLeft="5dp"
+                    android:text="test"/>
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+        <com.example.olddrivers.myapplication.view.activity.SeatTable
+            android:layout_below="@id/sc_info"
+            android:id="@+id/seatView"
+            android:background="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
 
-    <com.example.olddrivers.myapplication.view.activity.SeatTable
-        android:layout_below="@id/sc_info"
-        android:id="@+id/seatView"
-        android:background="#ffffff"
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        <GridView
+            android:layout_below="@id/seatView"
+            android:id="@+id/seat_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnWidth="50dp"
+            android:numColumns="auto_fit"
+            android:verticalSpacing="10dp"
+            android:horizontalSpacing="10dp"
+            android:stretchMode="columnWidth"
+            android:gravity="center" >
+        </GridView>
 
-    <GridView
-        android:layout_below="@id/seatView"
-        android:id="@+id/seat_gridview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnWidth="100dp"
-        android:numColumns="auto_fit"
-        android:verticalSpacing="10dp"
-        android:horizontalSpacing="10dp"
-        android:stretchMode="columnWidth"
-        android:gravity="center" >
-    </GridView>
+        <Button
+            android:id="@+id/btn_toConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="确认座位"/>
 
-    <Button
-        android:id="@+id/btn_toConfirm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="确认座位"/>
+    </RelativeLayout>
 
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

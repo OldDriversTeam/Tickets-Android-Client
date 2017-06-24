@@ -26,8 +26,8 @@ import java.util.Map;
 
 public class SessionChoosingActivity extends AppCompatActivity {
 
+    Toolbar toolbar;
     TextView cinema_name;
-    TextView movie_name;
     ListView listview;
 
     Cinema cinema;
@@ -54,6 +54,18 @@ public class SessionChoosingActivity extends AppCompatActivity {
     }
 
     void initialize() {
+
+        toolbar = (Toolbar) findViewById(R.id.sc_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
         Bundle bundle_in = getIntent().getExtras();
         session_data = new ArrayList<>();
         room = new ArrayList<>();
@@ -64,11 +76,10 @@ public class SessionChoosingActivity extends AppCompatActivity {
         date = bundle_in.getString("date");
 
         cinema_name = (TextView) findViewById(R.id.ss_cinema_name);
-        movie_name = (TextView) findViewById(R.id.ss_movie_name);
         listview = (ListView) findViewById(R.id.ss_listview);
 
+        toolbar.setTitle(movie.getName());
         cinema_name.setText(cinema.getName());
-        movie_name.setText(movie.getName());
         String url = AsynNetUtils.SERVER_ADDRESS + AsynNetUtils.GET_SHOWS_BY_DATA_CINEMA
                 + cinema.getId() + "/date/" + date + "/movie/" + movie.getId();
         AsynNetUtils.get(url, new AsynNetUtils.Callback() {

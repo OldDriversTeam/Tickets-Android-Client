@@ -1,177 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.olddrivers.myapplication.view.activity.MovieDetailActivity">
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
 
-        <ImageView
-            android:id="@+id/filmDetail_image"
-            android:layout_width="150dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            />
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_marginEnd="10dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:layout_gravity="center">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/md_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay">
 
             <TextView
-                android:id="@+id/filmDetail_name"
-               style="@style/FilmBriefInformation"
-                android:text="神奇女侠"/>
-
-            <TextView
-                style="@style/FilmBriefInformation"
-                android:text="上映日期："/>
-
-            <TextView
-                android:id="@+id/filmDetail_date"
-                style="@style/FilmBriefInformation"
-                android:text="2017-06-02"/>
-
-            <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/title_activity_movie_detail"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"/>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_test" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:padding="5dp"
+            android:layout_height="200dp">
+
+            <ImageView
+                android:id="@+id/filmDetail_image"
+                android:layout_width="150dp"
+                android:layout_height="180dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
                 android:layout_gravity="center">
 
                 <TextView
+                    android:id="@+id/filmDetail_name"
                     style="@style/FilmBriefInformation"
-                    android:layout_width="wrap_content"
-                    android:text="评分："/>
+                    android:text="神奇女侠"/>
 
                 <TextView
-                    android:id="@+id/fimeDetail_score"
                     style="@style/FilmBriefInformation"
+                    android:text="上映日期："/>
+
+                <TextView
+                    android:id="@+id/filmDetail_date"
+                    style="@style/FilmBriefInformation"
+                    android:text="2017-06-02"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:text="9.0"/>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        style="@style/FilmBriefInformation"
+                        android:layout_width="wrap_content"
+                        android:text="评分："/>
+
+                    <TextView
+                        android:id="@+id/fimeDetail_score"
+                        style="@style/FilmBriefInformation"
+                        android:layout_width="wrap_content"
+                        android:text="9.0"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <TextView
-            style="@style/FilmInformationTitle"
-            android:text="剧情简介：">
-        </TextView>
-
         <LinearLayout
-            android:id="@+id/description_layout"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            <ScrollView
-                android:id="@+id/description_scrollview"
+            <TextView
+                style="@style/FilmInformationTitle"
+                android:text="剧情简介：">
+            </TextView>
+
+            <LinearLayout
+                android:id="@+id/description_layout"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:orientation="vertical"
+                <ScrollView
+                    android:id="@+id/description_scrollview"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
 
-                    <TextView
-                        android:id="@+id/description_view"
+                    <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@android:color/black"
-                        android:textSize="18dip"
-                        >
-                    </TextView>
+                        android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:id="@+id/expand_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:paddingBottom="5dip"
-                        android:paddingLeft="5dip"
-                        android:paddingRight="5dip"
-                        android:paddingTop="5dip"
-                        android:src="@mipmap/text_ic_expand" />
+                        <TextView
+                            android:id="@+id/description_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/black"
+                            android:textSize="18dip"
+                            >
+                        </TextView>
 
-                </LinearLayout>
+                        <ImageView
+                            android:id="@+id/expand_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:paddingBottom="5dip"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:paddingTop="5dip"
+                            android:src="@mipmap/text_ic_expand" />
 
-            </ScrollView>
+                    </LinearLayout>
+
+                </ScrollView>
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/FilmInformationTitle"
+                android:text="制作详情：">
+            </TextView>
+
+            <LinearLayout
+                android:id="@+id/detail_layout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ScrollView
+                    android:id="@+id/detail_scrollview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/detail_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/black"
+                            android:textSize="18dip"
+                            >
+                        </TextView>
+
+                        <ImageView
+                            android:id="@+id/detail_expand_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:paddingBottom="5dip"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:paddingTop="5dip"
+                            android:src="@mipmap/text_ic_expand" />
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <TextView
-            style="@style/FilmInformationTitle"
-            android:text="制作详情：">
-        </TextView>
-
-        <LinearLayout
-            android:id="@+id/detail_layout"
-            android:orientation="vertical"
+        <Button
+            android:id="@+id/btn_toBuying"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ScrollView
-                android:id="@+id/detail_scrollview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/detail_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@android:color/black"
-                        android:textSize="18dip"
-                        >
-                    </TextView>
-
-                    <ImageView
-                        android:id="@+id/detail_expand_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:paddingBottom="5dip"
-                        android:paddingLeft="5dip"
-                        android:paddingRight="5dip"
-                        android:paddingTop="5dip"
-                        android:src="@mipmap/text_ic_expand" />
-
-                </LinearLayout>
-
-            </ScrollView>
-
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:text="购票"/>
 
     </LinearLayout>
-    
 
 
-    <Button
-        android:id="@+id/btn_toBuying"
-        android:layout_width="match_parent"
+    <!--<android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="购票"/>
-    
-</LinearLayout>
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_dialog_email" />-->
+
+</android.support.design.widget.CoordinatorLayout>

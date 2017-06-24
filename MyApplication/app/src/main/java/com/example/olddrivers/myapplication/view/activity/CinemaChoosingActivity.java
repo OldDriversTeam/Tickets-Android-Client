@@ -59,6 +59,8 @@ public class CinemaChoosingActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    Toolbar toolbar;
+    TextView movieView;
 
     static Movie movie;
     Showing showingWithCinemaList;
@@ -73,8 +75,16 @@ public class CinemaChoosingActivity extends AppCompatActivity {
     }
 
     void initialize() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.cc_toolbar);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -89,9 +99,10 @@ public class CinemaChoosingActivity extends AppCompatActivity {
 
         movie = (Movie) getIntent().getSerializableExtra("movie");
         if (movie != null) {
-            Log.i("dddddd",movie.getId());
+            Log.i("selected movie",movie.getName());
         }
-        Toast.makeText(this, movie.getName(), Toast.LENGTH_SHORT).show();
+        movieView = (TextView) findViewById(R.id.cc_movie);
+        movieView.setText(movie.getName());
 
     }
 
@@ -176,7 +187,7 @@ public class CinemaChoosingActivity extends AppCompatActivity {
 
                     Log.i("create", getActivity().toString());
                     simpleAdapter = new SimpleAdapter(getActivity(), data, R.layout.cinema_item,
-                            new String[] {"name", "id"}, new int[] {R.id.cinema_name, R.id.cinema_price});
+                            new String[] {"name"}, new int[] {R.id.cinema_name});
                     listView.setAdapter(simpleAdapter);
 
                 }

@@ -16,8 +16,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".view.activity.MainActivity"
-            android:launchMode="singleTask"></activity>
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name=".view.activity.LoginActivity"
             android:label="@string/title_activity_user_login">
@@ -30,8 +31,7 @@
         <activity
             android:name=".view.activity.MovieDetailActivity"
             android:label="@string/title_activity_movie_detail"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".view.activity.CinemaChoosingActivity"
             android:label=""
@@ -44,9 +44,8 @@
         <activity
             android:name=".view.activity.SeatChoosingActivity"
             android:label="@string/title_activity_seat_choosing"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".view.activity.MyTicketsActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".view.activity.MyTicketsActivity" />
         <activity
             android:name=".view.activity.TicketConfirm"
             android:label="@string/title_activity_ticket_confirm"
@@ -58,8 +57,11 @@
         <activity
             android:name=".view.activity.CompletePayment"
             android:label="@string/title_activity_complete_payment"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".view.activity.Test"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
