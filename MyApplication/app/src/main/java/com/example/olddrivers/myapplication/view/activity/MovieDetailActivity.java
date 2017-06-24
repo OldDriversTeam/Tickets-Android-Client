@@ -83,6 +83,23 @@ public class MovieDetailActivity extends AppCompatActivity {
                 film_date.setText(movie.getReleaseDate());
                 description_text.setText(movie.getStoryLine());
                 detail_text.setText(movie.getDetail());
+
+                default_description_lines = 5;
+                description_text.setHeight(description_text.getLineHeight() * default_description_lines);
+                detail_text.setHeight(detail_text.getLineHeight() * default_description_lines);
+                description_text.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        description_expand.setVisibility(description_text.getLineCount() > default_description_lines ? View.VISIBLE : View.GONE);
+                    }
+                });
+
+                detail_text.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        detail_expand.setVisibility(detail_text.getLineCount() > default_description_lines ? View.VISIBLE : View.GONE);
+                    }
+                });
                 AsynNetUtils.getBitmap(movie.getPoster(), new AsynNetUtils.BitmapCallback() {
                     @Override
                     public void onResponse(Bitmap response) {
@@ -94,24 +111,6 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         /*bundle_in = getIntent().getExtras();
         movie = Movies.get(bundle_in.getInt("position"));*/
-
-        default_description_lines = 5;
-        description_text.setHeight(description_text.getLineHeight() * default_description_lines);
-        detail_text.setHeight(detail_text.getLineHeight() * default_description_lines);
-
-        description_text.post(new Runnable() {
-            @Override
-            public void run() {
-                description_expand.setVisibility(description_text.getLineCount() > default_description_lines ? View.VISIBLE : View.GONE);
-            }
-        });
-
-        detail_text.post(new Runnable() {
-            @Override
-            public void run() {
-                detail_expand.setVisibility(detail_text.getLineCount() > default_description_lines ? View.VISIBLE : View.GONE);
-            }
-        });
 
     }
 
